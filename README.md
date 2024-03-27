@@ -16,7 +16,19 @@
 
 ###
 
-<p align="left">- 🔭 I’m currently working on [Transcription App](https://github.com/badgids/transcription-app)<br><br>- 👯 I’m looking to collaborate on **Machine Learning and AI development**<br><br>- 🤝 I’m looking for help with [OpenKlyde](https://github.com/badgids/OpenKlyde)<br><br>- 💬 Ask me about **Computer Science, Programming, Machine Learning, AI, & etc!**<br><br>- 📫 How to reach me **badgids@gmail.com**<br><br>- ⚡ Fun fact **I'm an Eagle Scout and love camping and the outdoors!**</p>
+<p align="left">
+  
+  - 🔭 I’m currently working on [Transcription App](https://github.com/badgids/transcription-app)<br><br>
+  
+  - 👯 I’m looking to collaborate on **Machine Learning and AI development**<br><br>
+  
+  - 🤝 I’m looking for help with [OpenKlyde](https://github.com/badgids/OpenKlyde)<br><br>
+  
+  - 💬 Ask me about **Computer Science, Programming, Machine Learning, AI, & etc!**<br><br>
+  
+  - 📫 How to reach me **badgids@gmail.com**<br><br>
+  
+  - ⚡ Fun fact **I'm an Eagle Scout and love camping and the outdoors!**</p>
 
 ###
 
