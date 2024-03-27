@@ -62,7 +62,7 @@
 
 ###
 
-<p align="left">📚 Frameworks, Platforms and Librariess:</p>
+<p align="left">📚 Frameworks, Platforms and Libraries:</p>
 
 ###
 
