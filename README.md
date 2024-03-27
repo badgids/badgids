@@ -31,4 +31,4 @@
 
 <p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=badgids&show_icons=true&locale=en" alt="badgids" /></p>
 
-<p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=badgids&" alt="badgids" /></p>
+<p><img align="right" src="https://github-readme-streak-stats.herokuapp.com/?user=badgids&" alt="badgids" /></p>
