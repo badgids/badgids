@@ -256,11 +256,15 @@
 
 <img width="100%" loading="lazy" src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" />
 
+<div align="center">
 
-<h3 align="left"><img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f4b8/512.gif" alt="💸" width="32" height="32"> Support Me <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f4b8/512.gif" alt="💸" width="32" height="32"></h3>
+<h3 align="center"><img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f4b8/512.gif" alt="💸" width="32" height="32"> Support Me <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f4b8/512.gif" alt="💸" width="32" height="32"></h3>
 
+![working_coding](https://github.com/badgids/badgids/assets/4584983/ca93ebd2-145a-4172-aedd-1e709e7f2972)
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y7NELMO)
+
+</div>
 
 <img width="100%" loading="lazy" src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" />
 
