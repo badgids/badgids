@@ -10,24 +10,24 @@
 
 <img width="100%" loading="lazy" src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" />
 
-<h1 align="center">Hi 👋, I'm Alan Guice!</h1>
+<h1 align="center"><img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f44b_1f3fc/512.gif" alt="👋" width="32" height="32"> Hi, I'm Alan Guice! </h1>
 
-<h2 align="center">I'm just some guy surfing the binary waves of this digital ocean...</h2>
+<h2 align="center">I'm just some guy surfing the binary waves of this digital ocean...<img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f601/512.gif" alt="😁" width="32" height="32"></h2>
 
 
 <p align="left">
   
-  - 🔭 I’m currently working on [Transcription App](https://github.com/badgids/transcription-app)<br><br>
+  - <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Man%20Factory%20Worker.png" alt="Man Factory Worker" width="25" height="25" /> I’m currently working on [Transcription App](https://github.com/badgids/transcription-app)<br><br>
   
-  - 👯 I’m looking to collaborate on **Machine Learning and AI development**<br><br>
+  - <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Man%20Construction%20Worker.png" alt="Man Construction Worker" width="25" height="25" /> I’m looking to collaborate on **Machine Learning and AI development**<br><br>
   
-  - 🤝 I’m looking for help with [OpenKlyde](https://github.com/badgids/OpenKlyde)<br><br>
+  - <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People/Man%20Detective.png" alt="Man Detective" width="25" height="25" /> I’m looking for help with [OpenKlyde](https://github.com/badgids/OpenKlyde)<br><br>
   
-  - 💬 Ask me about **Computer Science, Programming, Machine Learning, AI, & etc!**<br><br>
+  - <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/2753/512.gif" alt="❓" width="32" height="32"> Ask me about **Computer Science, Programming, Machine Learning, AI, & etc!**<br><br>
   
-  - 📫 How to reach me **badgids@gmail.com**<br><br>
+  - <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Open%20Mailbox%20with%20Lowered%20Flag.png" alt="Open Mailbox with Lowered Flag" width="25" height="25" /> How to reach me **badgids@gmail.com**<br><br>
   
-  - ⚡ Fun fact **I'm an Eagle Scout and love camping and the outdoors!**</p>
+  - <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f4a1/512.gif" alt="💡" width="32" height="32">Fun fact **I'm an Eagle Scout and love camping and the outdoors!**</p>
 
 <img width="100%" loading="lazy" src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" />
 
@@ -251,7 +251,7 @@
 <img width="100%" loading="lazy" src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" />
 
 
-<h3 align="left">💲 Support Me</h3>
+<h3 align="left"><img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f4b8/512.gif" alt="💸" width="32" height="32"> Support Me <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f4b8/512.gif" alt="💸" width="32" height="32"></h3>
 
 
 ![Ko-Fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)
