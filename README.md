@@ -1,4 +1,6 @@
-<img src="https://raw.githubusercontent.com/badgids/badgids/output/snake.svg" alt="Snake animation" />
+<div align="center">
+<img src="https://raw.githubusercontent.com/badgids/badgids/output/snake.svg" alt="Snake animation" width="500px" />
+</div>
 
 ###
 
