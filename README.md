@@ -12,7 +12,7 @@
 
 <h1 align="center"><img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f44b_1f3fc/512.gif" alt="👋" width="32" height="32"> Hi, I'm Alan Guice! </h1>
 
-<h2 align="center">I'm just some guy surfing the binary waves of this digital ocean...<img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f601/512.gif" alt="😁" width="32" height="32"></h2>
+<h2 align="center">I'm just some guy surfing the waves of this digital ocean...<img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f601/512.gif" alt="😁" width="32" height="32"></h2>
 
 
 <p align="left">
