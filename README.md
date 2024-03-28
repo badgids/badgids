@@ -10,15 +10,18 @@
 
 <img width="100%" loading="lazy" src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" />
 
-<div align="center">
-<img src="https://readme-typing-svg.herokuapp.com?font=Noto+Sans+Chorasmian&size=35&pause=1000&color=F9A620&center=true&random=false&width=435&lines=+Hi%2C+I'm+Alan+Guice" alt="Typing SVG" />
-</div>
 
-<div align="center">
-<img src="https://readme-typing-svg.herokuapp.com?font=Noto+Sans+Chorasmian&pause=1000&color=F9A620&center=true&random=false&width=435&lines=Computer+Scientist+and+Software+Engineer" alt="Typing SVG" />
+<span align="center">
+  
+  <img align="left" src="https://github.com/badgids/badgids/assets/4584983/b7877d5c-05eb-4e46-9af6-e608b5dd0b6b" width="150" />
+  <img align="left" src="https://readme-typing-svg.herokuapp.com?font=Noto+Sans+Chorasmian&size=35&pause=1000&color=F9A620&center=true&random=false&width=435&lines=+Hi%2C+I'm+Alan+Guice" alt="Typing SVG" />
+  <img align="center" src="https://readme-typing-svg.herokuapp.com?font=Noto+Sans+Chorasmian&pause=1000&color=F9A620&center=true&random=false&width=435&lines=Computer+Scientist+and+Software+Engineer" alt="Typing SVG" />
 
-<h2 align="center">Keep The Neurons Firing!</h2>
-</div
+</span>
+
+<img align="right" src="https://readme-typing-svg.herokuapp.com?font=Noto+Sans+Chorasmian&pause=1000&color=FFD449&random=false&width=435&lines=-+%22Keep+The+Neurons+Firing!%22" alt="Typing SVG" />
+
+<img width="100%" loading="lazy" src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" />
 
 
 <p align="left">
