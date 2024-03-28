@@ -10,9 +10,15 @@
 
 <img width="100%" loading="lazy" src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" />
 
-<h1 align="center"><img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f44b_1f3fc/512.gif" alt="👋" width="32" height="32"> Hi, I'm Alan Guice! </h1>
+<div align="center">
+<img src="https://readme-typing-svg.herokuapp.com?font=Noto+Sans+Chorasmian&size=35&pause=1000&color=F9A620&center=true&random=false&width=435&lines=+Hi%2C+I'm+Alan+Guice" alt="Typing SVG" />
+</div>
 
-<h2 align="center">I'm just some guy surfing the waves of this digital ocean...<img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f601/512.gif" alt="😁" width="32" height="32"></h2>
+<div align="center">
+<img src="https://readme-typing-svg.herokuapp.com?font=Noto+Sans+Chorasmian&pause=1000&color=F9A620&center=true&random=false&width=435&lines=Computer+Scientist+and+Software+Engineer" alt="Typing SVG" />
+
+<h2 align="center">Keep The Neurons Firing!</h2>
+</div
 
 
 <p align="left">
