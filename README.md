@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./assets/badgids-hero-performance-v5.gif" width="100%" alt="Badgids actively strumming and fretting his mandolin inside a cyber-gothic forge of code, music, fire, and lightning" />
+<img src=".assets/badgids-eternal-coder-typing-v4.gif" width="100%" alt="Badgids actively typing at a flaming computer while code, sparks, and music notes fly from the screen" />
 
 <h1>Badgids</h1>
 
