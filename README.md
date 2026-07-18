@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src=".assets/badgids-eternal-coder-typing-v4.gif" width="100%" alt="Badgids actively typing at a flaming computer while code, sparks, and music notes fly from the screen" />
+<img src="./assets/badgids-eternal-coder-typing-v4.gif" width="100%" alt="Badgids actively typing at a flaming computer while code, sparks, and music notes fly from the screen" />
 
 <h1>Badgids</h1>
 
