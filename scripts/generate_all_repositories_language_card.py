@@ -322,12 +322,11 @@ def render_svg(
             f'height="{height}" viewBox="0 0 {width} {height}" '
             'role="img" aria-labelledby="title description">'
         ),
-        '<title id="title">Languages across all public repositories</title>',
+        '<title id="title">Languages Used</title>',
         (
             '<desc id="description">'
-            f'GitHub Linguist language-byte distribution across '
-            f'{repository_count} public repositories owned by {escape(USERNAME)}, '
-            'including forks.'
+            f'Language usage across {repository_count} repositories and '
+            f'{distinct_languages} languages.'
             '</desc>'
         ),
         (
@@ -344,17 +343,15 @@ def render_svg(
             '.legend-value{font-size:13px;fill:#8B949E}'
             '.center-total{font-size:21px;font-weight:700;fill:#F0F6FC}'
             '.center-label{font-size:12px;fill:#8B949E}'
-            '.footer{font-size:11px;fill:#6E7681}'
             '</style>'
         ),
         (
             '<text class="heading" x="34" y="43">'
-            'Languages Across All Public Repositories</text>'
+            'Languages Used</text>'
         ),
         (
             '<text class="subheading" x="34" y="68">'
-            f'{repository_count} public repositories · forks included · '
-            f'{repositories_with_languages} with detected code · '
+            f'{repository_count} repositories · '
             f'{distinct_languages} languages</text>'
         ),
     ]
@@ -452,11 +449,6 @@ def render_svg(
             ]
         )
 
-    parts.append(
-        f'<text class="footer" x="34" y="{height - 22}">'
-        'Calculated from each repository’s complete /languages response; '
-        'not from primary-language labels.</text>'
-    )
     parts.append("</svg>")
 
     return "\n".join(parts) + "\n"
