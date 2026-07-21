@@ -290,19 +290,62 @@ I am especially interested in collaborating on **machine learning, applied AI, l
 
 <div align="center">
 
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=badgids&theme=github_dark" width="100%" alt="Badgids GitHub contribution graph" />
+<img
+  src="./profile-summary-card-output/github_dark/0-profile-details.svg"
+  width="100%"
+  alt="Badgids GitHub profile details"
+/>
 
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=badgids&theme=github_dark" height="180" alt="Most-used languages by commits" />
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=badgids&theme=github_dark" height="180" alt="Repositories by language" />
+<br>
 
-<img src="https://streak-stats.demolab.com?user=badgids&theme=transparent&hide_border=true&background=0D1117&ring=F9A620&fire=F9A620&currStreakLabel=F9A620&sideLabels=22D3EE&currStreakNum=FFFFFF&sideNums=FFFFFF&dates=8B949E" alt="Badgids GitHub streak" />
+<img
+  src="./profile-summary-card-output/github_dark/2-most-commit-language.svg"
+  width="49%"
+  alt="Badgids most-used languages by commits"
+/>
+<img
+  src="./profile-summary-card-output/github_dark/1-repos-per-language.svg"
+  width="49%"
+  alt="Badgids repositories by language"
+/>
 
-<img src="https://github-trophies.vercel.app/?username=badgids&theme=darkhub&no-frame=true&no-bg=true&margin-w=10&margin-h=10&column=4&row=2&rank=-UNKNOWN&title=-PullRequest,-AncientUser,-NewUser,-Organizations" width="100%" alt="Badgids GitHub trophies: unknown, pull request, ancient user, new user, and organizations trophies excluded" />
+<br>
 
-</div>
+<img
+  src="./profile-summary-card-output/github_dark/3-stats.svg"
+  width="49%"
+  alt="Badgids GitHub statistics"
+/>
+<img
+  src="./profile-summary-card-output/github_dark/4-productive-time.svg"
+  width="49%"
+  alt="Badgids productive contribution times"
+/>
 
-<div align="center">
-  <img src="./assets/snake.svg?v=graphite-amber-cyan" alt="Graphite, amber, and cyan contribution snake animation" width="880" />
+<br>
+
+<img
+  src="./assets/github-streak.svg"
+  width="100%"
+  alt="Badgids GitHub contribution streak"
+/>
+
+<br>
+
+<img
+  src="./assets/github-trophies.svg"
+  width="100%"
+  alt="Badgids GitHub trophies"
+/>
+
+<br>
+
+<img
+  src="./assets/snake.svg"
+  width="880"
+  alt="Graphite, amber, and cyan contribution snake animation"
+/>
+
 </div>
 
 ---

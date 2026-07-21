@@ -1,0 +1,147 @@
+name: Refresh profile assets
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    - cron: "17 6,18 * * *"
+      timezone: "America/New_York"
+
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/profile-assets.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-profile-assets
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    name: Generate profile cards and graphics
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out profile repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve current Eastern UTC offset
+        id: eastern
+        shell: bash
+        run: |
+          raw_offset="$(TZ=America/New_York date +%z)"
+          sign="${raw_offset:0:1}"
+          hours="${raw_offset:1:2}"
+          echo "offset=${sign}$((10#$hours))" >> "$GITHUB_OUTPUT"
+
+      - name: Generate GitHub profile summary cards
+        uses: vn7n24fzkq/github-profile-summary-cards@release
+        env:
+          GITHUB_TOKEN: ${{ secrets.SUMMARY_GITHUB_TOKEN }}
+        with:
+          USERNAME: badgids
+          BRANCH_NAME: main
+          UTC_OFFSET: ${{ steps.eastern.outputs.offset }}
+          THEME: github_dark
+          AUTO_PUSH: false
+          ANIMATION: none
+
+      - name: Download current trophy and streak cards
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p assets
+
+          download_svg() {
+            local output="$1"
+            shift
+
+            local temporary="${output}.tmp"
+            local downloaded=0
+
+            for url in "$@"; do
+              echo "Fetching ${url}"
+
+              if curl \
+                --fail \
+                --location \
+                --silent \
+                --show-error \
+                --retry 3 \
+                --retry-all-errors \
+                --retry-delay 5 \
+                --connect-timeout 20 \
+                --max-time 120 \
+                --user-agent "badgids-profile-refresh" \
+                "$url" \
+                --output "$temporary"; then
+
+                if grep -qi "<svg" "$temporary"; then
+                  mv "$temporary" "$output"
+                  downloaded=1
+                  echo "Updated ${output}"
+                  break
+                fi
+
+                echo "Downloaded response was not a valid SVG."
+              fi
+            done
+
+            rm -f "$temporary"
+
+            if [[ "$downloaded" -eq 0 ]]; then
+              if [[ -s "$output" ]] && grep -qi "<svg" "$output"; then
+                echo "Provider unavailable; retaining previous ${output}"
+              else
+                echo "::error::Unable to create ${output}"
+                return 1
+              fi
+            fi
+          }
+
+          download_svg \
+            "assets/github-trophies.svg" \
+            "https://github-profile-trophy.vercel.app/?username=badgids&theme=darkhub&no-frame=true&no-bg=true&margin-w=10&margin-h=10&column=4&row=2" \
+            "https://github-profile-trophy-liard-delta.vercel.app/?username=badgids&theme=darkhub&no-frame=true&no-bg=true&margin-w=10&margin-h=10&column=4&row=2"
+
+          download_svg \
+            "assets/github-streak.svg" \
+            "https://streak-stats.demolab.com?user=badgids&theme=transparent&hide_border=true&background=0D1117&ring=F9A620&fire=F9A620&currStreakLabel=F9A620&sideLabels=22D3EE&currStreakNum=FFFFFF&sideNums=FFFFFF&dates=8B949E"
+
+      - name: Generate contribution snake
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: badgids
+          outputs: >-
+            assets/snake.svg?palette=github-dark&color_snake=#F9A620&color_dots=#0D1117,#164E63,#0891B2,#22D3EE,#F9A620
+
+      - name: Commit refreshed profile assets
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add \
+            profile-summary-card-output \
+            assets/github-trophies.svg \
+            assets/github-streak.svg \
+            assets/snake.svg
+
+          if git diff --cached --quiet; then
+            echo "Profile assets are already current."
+            exit 0
+          fi
+
+          git commit -m "Refresh GitHub profile assets"
+          git pull --rebase origin main
+          git push origin HEAD:main
