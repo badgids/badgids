@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./assets/badgids-eternal-coder-typing-v4.gif" width="100%" alt="Badgids actively typing at a flaming computer while code, sparks, and music notes fly from the screen" />
+<img src="./assets/badgids_eternal_coder.gif" width="100%" alt="Badgids actively typing at a flaming computer while code, sparks, and music notes fly from the screen" />
 
 <h1>Badgids</h1>
 
@@ -97,13 +97,13 @@ The discipline and outdoor foundation I developed as an **Eagle Scout** still sh
 
 ## Selected work
 
-| Project | What it explores |
-|---|---|
+| Project                                                                       | What it explores                                                                   |
+| ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
 | **[ComfyUI Setup Manager](https://github.com/badgids/comfyui-setup-manager)** | Portable, repairable, multi-install ComfyUI management through a full TUI and CLI. |
-| **[Gonzo-Chat-7B-GGUF](https://huggingface.co/Badgids/Gonzo-Chat-7B-GGUF)** | A merged 7B conversational model optimized for local GGUF inference. |
-| **[Gonzo-Code-7B-GGUF](https://huggingface.co/Badgids/Gonzo-Code-7B-GGUF)** | A locally runnable merged model focused on coding and agent-oriented work. |
-| **[OpenKlyde](https://github.com/badgids/OpenKlyde)** | An open-source Discord bot project; collaboration and help are welcome. |
-| **[Transcription App](https://github.com/badgids/transcription-app)** | Real-time transcription experiments powered by OpenAI Whisper. |
+| **[Gonzo-Chat-7B-GGUF](https://huggingface.co/Badgids/Gonzo-Chat-7B-GGUF)**   | A merged 7B conversational model optimized for local GGUF inference.               |
+| **[Gonzo-Code-7B-GGUF](https://huggingface.co/Badgids/Gonzo-Code-7B-GGUF)**   | A locally runnable merged model focused on coding and agent-oriented work.         |
+| **[OpenKlyde](https://github.com/badgids/OpenKlyde)**                         | An open-source Discord bot project; collaboration and help are welcome.            |
+| **[Transcription App](https://github.com/badgids/transcription-app)**         | Real-time transcription experiments powered by OpenAI Whisper.                     |
 
 I am especially interested in collaborating on **machine learning, applied AI, local inference, automation, agent systems, and open-source tools**. Ask me about computer science, programming, ML/AI, ComfyUI, or turning an ambitious idea into a working system.
 
@@ -111,15 +111,15 @@ I am especially interested in collaborating on **machine learning, applied AI, l
 
 ## Journey so far
 
-| Era | Focus |
-|---|---|
-| **Foundation** | Earned the rank of Eagle Scout; built a lifelong foundation in leadership, outdoor skills, service, and environmental appreciation. |
-| **Early digital creation** | Became a prolific YouTube bushcraft creator, documenting outdoor skills, gear, experiments, and DIY problem solving. |
-| **Community leadership** | Created the Hamilton County Community Bail Fund in partnership with CALEB; served as a CALEB director, public spokesperson, newspaper interviewee, and local talk-radio co-host. |
-| **Emerging-industry leadership** | After the bail-fund and CALEB work, served as Project Manager at Snapdragon Hemp during the Farm Bill transition and Tennessee hemp industry's rapid growth. |
-| **2023–2024** | Published Gonzo Chat and Gonzo Code models on Hugging Face and developed Python, bot, transcription, and local-inference projects. |
-| **2026** | Expanded advanced local ComfyUI workflows and autonomous engineering work using CadQuery, CQparts, Agent Skills, and AI-assisted assembly interpretation. |
-| **Now** | Building ComfyUI Setup Manager while continuing open-source AI work, music, YouTube creation, woodworking, and outdoor exploration. |
+| Era                              | Focus                                                                                                                                                                            |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Foundation**                   | Earned the rank of Eagle Scout; built a lifelong foundation in leadership, outdoor skills, service, and environmental appreciation.                                              |
+| **Early digital creation**       | Became a prolific YouTube bushcraft creator, documenting outdoor skills, gear, experiments, and DIY problem solving.                                                             |
+| **Community leadership**         | Created the Hamilton County Community Bail Fund in partnership with CALEB; served as a CALEB director, public spokesperson, newspaper interviewee, and local talk-radio co-host. |
+| **Emerging-industry leadership** | After the bail-fund and CALEB work, served as Project Manager at Snapdragon Hemp during the Farm Bill transition and Tennessee hemp industry's rapid growth.                     |
+| **2023–2024**                    | Published Gonzo Chat and Gonzo Code models on Hugging Face and developed Python, bot, transcription, and local-inference projects.                                               |
+| **2026**                         | Expanded advanced local ComfyUI workflows and autonomous engineering work using CadQuery, CQparts, Agent Skills, and AI-assisted assembly interpretation.                        |
+| **Now**                          | Building ComfyUI Setup Manager while continuing open-source AI work, music, YouTube creation, woodworking, and outdoor exploration.                                              |
 
 ---
 
@@ -361,7 +361,7 @@ I am especially interested in collaborating on **machine learning, applied AI, l
 
 <br><br>
 
-<img src="./assets/badgids-eternal-coder-typing-v4.gif" width="100%" alt="Badgids actively typing at a flaming computer while code, sparks, and music notes fly from the screen" />
+<img src="./assets/badgids_hero_music.gif" width="100%" alt="Badgids playing the mandolin as sparks and flames fly around the room" />
 
 <br>
 
