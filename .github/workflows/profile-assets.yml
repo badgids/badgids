@@ -5,6 +5,7 @@ on:
 
   schedule:
     - cron: "17 6,18 * * *"
+      timezone: "America/New_York"
 
   push:
     branches:
@@ -23,11 +24,11 @@ jobs:
   refresh:
     name: Generate profile cards and graphics
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
 
     steps:
       - name: Check out profile repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -50,70 +51,22 @@ jobs:
           UTC_OFFSET: ${{ steps.eastern.outputs.offset }}
           THEME: github_dark
           AUTO_PUSH: false
-          ANIMATION: none
 
-      - name: Download current trophy and streak cards
-        shell: bash
-        run: |
-          set -euo pipefail
+      - name: Generate GitHub trophy card
+        uses: ryo-ma/github-profile-trophy@ccb591b887775ee567c0d9a38424ddfb9b1906c4
+        with:
+          username: badgids
+          output_path: assets/github-trophies.svg
+          token: ${{ secrets.SUMMARY_GITHUB_TOKEN }}
+          theme: darkhub
 
-          mkdir -p assets
-
-          download_svg() {
-            local output="$1"
-            shift
-
-            local temporary="${output}.tmp"
-            local downloaded=0
-
-            for url in "$@"; do
-              echo "Fetching ${url}"
-
-              if curl \
-                --fail \
-                --location \
-                --silent \
-                --show-error \
-                --retry 3 \
-                --retry-all-errors \
-                --retry-delay 5 \
-                --connect-timeout 20 \
-                --max-time 120 \
-                --user-agent "badgids-profile-refresh" \
-                "$url" \
-                --output "$temporary"; then
-
-                if grep -qi "<svg" "$temporary"; then
-                  mv "$temporary" "$output"
-                  downloaded=1
-                  echo "Updated ${output}"
-                  break
-                fi
-
-                echo "Downloaded response was not a valid SVG."
-              fi
-            done
-
-            rm -f "$temporary"
-
-            if [[ "$downloaded" -eq 0 ]]; then
-              if [[ -s "$output" ]] && grep -qi "<svg" "$output"; then
-                echo "Provider unavailable; retaining previous ${output}"
-              else
-                echo "::error::Unable to create ${output}"
-                return 1
-              fi
-            fi
-          }
-
-          download_svg \
-            "assets/github-trophies.svg" \
-            "https://github-profile-trophy.vercel.app/?username=badgids&theme=darkhub&no-frame=true&no-bg=true&margin-w=10&margin-h=10&column=4&row=2" \
-            "https://github-profile-trophy-liard-delta.vercel.app/?username=badgids&theme=darkhub&no-frame=true&no-bg=true&margin-w=10&margin-h=10&column=4&row=2"
-
-          download_svg \
-            "assets/github-streak.svg" \
-            "https://streak-stats.demolab.com?user=badgids&theme=transparent&hide_border=true&background=0D1117&ring=F9A620&fire=F9A620&currStreakLabel=F9A620&sideLabels=22D3EE&currStreakNum=FFFFFF&sideNums=FFFFFF&dates=8B949E"
+      - name: Generate GitHub streak card
+        uses: DenverCoder1/github-readme-streak-stats@2c2e936823881ec94120a207d7a534520eeadf8f
+        with:
+          path: assets/github-streak.svg
+          token: ${{ secrets.SUMMARY_GITHUB_TOKEN }}
+          options: >-
+            user=badgids&theme=transparent&hide_border=true&background=0D1117&ring=F9A620&fire=F9A620&currStreakLabel=F9A620&sideLabels=22D3EE&currStreakNum=FFFFFF&sideNums=FFFFFF&dates=8B949E
 
       - name: Generate contribution snake
         uses: Platane/snk/svg-only@v3
@@ -121,6 +74,36 @@ jobs:
           github_user_name: badgids
           outputs: >-
             assets/snake.svg?palette=github-dark&color_snake=#F9A620&color_dots=#0D1117,#164E63,#0891B2,#22D3EE,#F9A620
+
+      - name: Verify generated SVG files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          files=(
+            "profile-summary-card-output/github_dark/0-profile-details.svg"
+            "profile-summary-card-output/github_dark/1-repos-per-language.svg"
+            "profile-summary-card-output/github_dark/2-most-commit-language.svg"
+            "profile-summary-card-output/github_dark/3-stats.svg"
+            "profile-summary-card-output/github_dark/4-productive-time.svg"
+            "assets/github-trophies.svg"
+            "assets/github-streak.svg"
+            "assets/snake.svg"
+          )
+
+          for file in "${files[@]}"; do
+            if [[ ! -s "$file" ]]; then
+              echo "::error::Missing or empty SVG: $file"
+              exit 1
+            fi
+
+            if ! grep -qi "<svg" "$file"; then
+              echo "::error::File is not a valid SVG: $file"
+              exit 1
+            fi
+
+            echo "Verified $file"
+          done
 
       - name: Commit refreshed profile assets
         shell: bash
