@@ -299,14 +299,9 @@ I am especially interested in collaborating on **machine learning, applied AI, l
 <br>
 
 <img
-  src="./profile-summary-card-output/github_dark/2-most-commit-language.svg"
-  width="49%"
-  alt="Badgids most-used languages by commits"
-/>
-<img
-  src="./profile-summary-card-output/github_dark/1-repos-per-language.svg"
-  width="49%"
-  alt="Badgids repositories by language"
+  src="./assets/all-repositories-languages.svg"
+  width="100%"
+  alt="All public repositories by complete GitHub Linguist language-byte totals, including forks"
 />
 
 <br>

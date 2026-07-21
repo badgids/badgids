@@ -52,6 +52,13 @@ jobs:
           THEME: github_dark
           AUTO_PUSH: false
 
+      - name: Generate all-repositories language card
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_USERNAME: badgids
+          LANGUAGE_CARD_OUTPUT: assets/all-repositories-languages.svg
+        run: python3 scripts/generate_all_repositories_language_card.py
+
       - name: Generate GitHub trophy card
         uses: ryo-ma/github-profile-trophy@ccb591b887775ee567c0d9a38424ddfb9b1906c4
         with:
@@ -86,6 +93,7 @@ jobs:
             "profile-summary-card-output/github_dark/2-most-commit-language.svg"
             "profile-summary-card-output/github_dark/3-stats.svg"
             "profile-summary-card-output/github_dark/4-productive-time.svg"
+            "assets/all-repositories-languages.svg"
             "assets/github-trophies.svg"
             "assets/github-streak.svg"
             "assets/snake.svg"
@@ -115,6 +123,7 @@ jobs:
 
           git add \
             profile-summary-card-output \
+            assets/all-repositories-languages.svg \
             assets/github-trophies.svg \
             assets/github-streak.svg \
             assets/snake.svg
