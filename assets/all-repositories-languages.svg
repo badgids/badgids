@@ -1,16 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="509" viewBox="0 0 900 509" role="img" aria-labelledby="title description">
-<title id="title">Languages across all public repositories</title>
-<desc id="description">GitHub Linguist language-byte distribution across 359 public repositories owned by badgids, including forks.</desc>
+<title id="title">Languages Used</title>
+<desc id="description">Language usage across 359 repositories and 138 languages.</desc>
 <rect x="0.5" y="0.5" width="899" height="508" rx="10" fill="#0D1117" stroke="#30363D"/>
-<style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}.heading{font-size:23px;font-weight:700;fill:#F0F6FC}.subheading{font-size:13px;fill:#8B949E}.legend-name{font-size:14px;font-weight:600;fill:#C9D1D9}.legend-value{font-size:13px;fill:#8B949E}.center-total{font-size:21px;font-weight:700;fill:#F0F6FC}.center-label{font-size:12px;fill:#8B949E}.footer{font-size:11px;fill:#6E7681}</style>
-<text class="heading" x="34" y="43">Languages Across All Public Repositories</text>
-<text class="subheading" x="34" y="68">359 public repositories · forks included · 342 with detected code · 138 languages</text>
+<style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}.heading{font-size:23px;font-weight:700;fill:#F0F6FC}.subheading{font-size:13px;fill:#8B949E}.legend-name{font-size:14px;font-weight:600;fill:#C9D1D9}.legend-value{font-size:13px;fill:#8B949E}.center-total{font-size:21px;font-weight:700;fill:#F0F6FC}.center-label{font-size:12px;fill:#8B949E}</style>
+<text class="heading" x="34" y="43">Languages Used</text>
+<text class="subheading" x="34" y="68">359 repositories · 138 languages</text>
 <path d="M 225.805 130.502 A 142 142 0 0 1 334.609 362.777 L 285.980 322.724 A 79 79 0 0 0 225.448 193.501 Z" fill="#F34B7D" stroke="#0D1117" stroke-width="1"><title>C++: 36.06% (725 MB)</title></path>
-<path d="M 333.578 364.014 A 142 142 0 0 1 153.898 395.417 L 185.443 340.883 A 79 79 0 0 0 285.406 323.413 Z" fill="#555555" stroke="#0D1117" stroke-width="1"><title>C: 22.38% (450 MB)</title></path>
+<path d="M 333.578 364.014 A 142 142 0 0 1 153.898 395.416 L 185.443 340.883 A 79 79 0 0 0 285.406 323.413 Z" fill="#555555" stroke="#0D1117" stroke-width="1"><title>C: 22.38% (450 MB)</title></path>
 <path d="M 152.508 394.602 A 142 142 0 0 1 90.649 318.475 L 150.255 298.078 A 79 79 0 0 0 184.670 340.430 Z" fill="#3572A5" stroke="#0D1117" stroke-width="1"><title>Python: 11.41% (229 MB)</title></path>
 <path d="M 90.136 316.948 A 142 142 0 0 1 86.085 243.061 L 147.716 256.122 A 79 79 0 0 0 149.970 297.228 Z" fill="#3178C6" stroke="#0D1117" stroke-width="1"><title>TypeScript: 8.57% (172 MB)</title></path>
 <path d="M 86.428 241.487 A 142 142 0 0 1 103.755 198.584 L 157.547 231.378 A 79 79 0 0 0 147.907 255.246 Z" fill="#DA5B0B" stroke="#0D1117" stroke-width="1"><title>Jupyter Notebook: 5.39% (108 MB)</title></path>
-<path d="M 104.601 197.213 A 142 142 0 0 1 116.396 181.017 L 164.579 221.605 A 79 79 0 0 0 158.018 230.615 Z" fill="#F1E05A" stroke="#0D1117" stroke-width="1"><title>JavaScript: 2.43% (49 MB)</title></path>
+<path d="M 104.601 197.213 A 142 142 0 0 1 116.395 181.017 L 164.579 221.605 A 79 79 0 0 0 158.018 230.615 Z" fill="#F1E05A" stroke="#0D1117" stroke-width="1"><title>JavaScript: 2.43% (49 MB)</title></path>
 <path d="M 117.198 180.073 A 142 142 0 0 1 123.962 172.724 L 168.788 216.991 A 79 79 0 0 0 165.026 221.079 Z" fill="#00ADD8" stroke="#0D1117" stroke-width="1"><title>Go: 1.22% (24 MB)</title></path>
 <path d="M 124.538 172.144 A 142 142 0 0 1 130.955 166.107 L 172.679 213.310 A 79 79 0 0 0 169.109 216.668 Z" fill="#E34C26" stroke="#0D1117" stroke-width="1"><title>HTML: 1.07% (22 MB)</title></path>
 <path d="M 131.510 165.618 A 142 142 0 0 1 137.842 160.395 L 176.511 210.132 A 79 79 0 0 0 172.988 213.038 Z" fill="#B07219" stroke="#0D1117" stroke-width="1"><title>Java: 1.00% (20 MB)</title></path>
@@ -55,5 +55,4 @@
 <rect x="425" y="412" width="14" height="14" rx="3" fill="#8B949E"/>
 <text class="legend-name" x="448" y="424">Other (127 languages)</text>
 <text class="legend-value" x="858" y="424" text-anchor="end">8.69% · 175 MB</text>
-<text class="footer" x="34" y="487">Calculated from each repository’s complete /languages response; not from primary-language labels.</text>
 </svg>
