@@ -60,7 +60,7 @@ jobs:
         run: python3 scripts/generate_all_repositories_language_card.py
 
       - name: Generate GitHub trophy card
-        uses: ryo-ma/github-profile-trophy@ccb591b887775ee567c0d9a38424ddfb9b1906c4
+        uses: ryo-ma/github-profile-trophy@e3c89df995e92e67cdd4b2acaab9d974583dc1f7
         with:
           username: badgids
           output_path: assets/github-trophies.svg
