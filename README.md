@@ -254,15 +254,101 @@ I am especially interested in collaborating on **machine learning, applied AI, l
 
 ## Journey so far
 
-| Era                              | Focus                                                                                                                                                                            |
-| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Foundation**                   | Earned the rank of Eagle Scout; built a lifelong foundation in leadership, outdoor skills, service, and environmental appreciation.                                              |
-| **Early digital creation**       | Became a prolific YouTube bushcraft creator, documenting outdoor skills, gear, experiments, and DIY problem solving.                                                             |
-| **Community leadership**         | Created the Hamilton County Community Bail Fund in partnership with CALEB; served as a CALEB director, public spokesperson, newspaper interviewee, and local talk-radio co-host. |
-| **Emerging-industry leadership** | After the bail-fund and CALEB work, served as Project Manager at Snapdragon Hemp during the Farm Bill transition and Tennessee hemp industry's rapid growth.                     |
-| **2023–2024**                    | Published Gonzo Chat and Gonzo Code models on Hugging Face and developed Python, bot, transcription, and local-inference projects.                                               |
-| **2026**                         | Expanded advanced local ComfyUI workflows and autonomous engineering work using CadQuery, CQparts, Agent Skills, and AI-assisted assembly interpretation.                        |
-| **Now**                          | Building ComfyUI Setup Manager while continuing open-source AI work, music, YouTube creation, woodworking, and outdoor exploration.                                              |
+I've never followed a particularly straight career path. I've spent most of my life learning how things work, building things, getting involved when I thought something needed changing, and following interesting problems wherever they led.
+
+### 🦅 Eagle Scout
+
+I earned the rank of **Eagle Scout** when I was younger. Scouting gave me a solid foundation in leadership, service, outdoor skills, self-reliance, environmental stewardship, and figuring things out with whatever tools were available.
+
+A lot of that stuck with me. I'm still a camper, hiker, bushcrafter, maker, and the kind of person who would rather understand how something works than just accept that it does.
+
+### 🏕️ Bushcraft and YouTube
+
+**Badgids** started as my online identity long before I was doing anything with AI.
+
+I became a prolific bushcraft creator on YouTube, making videos about camping, outdoor skills, gear, DIY projects, experiments, and whatever I happened to be learning at the time.
+
+YouTube became a way to document what I was doing and share it with other people. Over the years the subject matter changed, but I never really stopped doing that.
+
+The same channel and online identity eventually expanded into music, technology, software, AI, commentary, and all the other things I work on now.
+
+### ⚖️ CALEB and the Hamilton County Community Bail Fund
+
+At one point my attention shifted heavily toward criminal justice and community organizing.
+
+I created the **Hamilton County Community Bail Fund** in partnership with **CALEB, Chattanoogans in Action for Love, Equality and Benevolence**, and served as a **CALEB director** during a very active period of work around bail reform, pretrial detention, incarceration, equity, and community accountability.
+
+That work put me in a much more public role than I had been used to. I became a spokesperson on bail and pretrial justice issues and was interviewed several times by local newspapers, including the *Chattanooga Times Free Press* and the Cleveland-area press.
+
+I also **co-hosted a local talk radio program**, where we discussed bail reform, criminal justice policy, community issues, and politics affecting people in the Chattanooga area.
+
+It taught me a lot about organizing people, explaining complicated issues in plain language, dealing with disagreement, working with the public, and turning an idea into something that actually operates in the real world.
+
+### 🌿 Snapdragon Hemp
+
+After my work with the bail fund and CALEB, I became a **Project Manager at Snapdragon Hemp**.
+
+This was during the period when the Farm Bill had opened up a rapidly changing hemp and cannabinoid industry. The laws, regulations, products, operations, and business landscape were all changing at the same time.
+
+Project management in that environment meant dealing with a lot of moving parts and solving problems without having a nice established rulebook to follow.
+
+That suited me pretty well.
+
+### 🎵 Music and Dead Man's Mandolin
+
+Music has been part of my life alongside everything else.
+
+As **Badgids** and through **Dead Man's Mandolin**, I write, produce, record, and release original music. My work pulls from bluegrass, Appalachian music, rock, metal, blues, dark country, and whatever else fits what I'm trying to make.
+
+I also create videos, characters, artwork, and other media around the music.
+
+For me, music and software aren't as far apart as they might look. Both involve building something piece by piece, trying things that don't work, changing them, and eventually getting everything to fit together.
+
+### 🤖 Open source and local AI
+
+My longtime interest in computers eventually led me into machine learning and local AI.
+
+I started working with **Python, automation, bots, Whisper transcription, local inference, LLMs, model merging, GGUF, llama.cpp, Ollama, Hugging Face, CUDA, and generative AI tools**.
+
+On Hugging Face I released the **Gonzo Chat** and **Gonzo Code** model families, including GGUF versions for local inference.
+
+On GitHub, that work grew into software, utilities, custom nodes, integrations, workflows, experiments, and agent tooling.
+
+I've always been especially interested in local and open systems. I like software that I can run on my own hardware, inspect, modify, repair, and adapt instead of depending entirely on somebody else's service.
+
+### 🎬 ComfyUI, agents, and production tools
+
+A lot of my current development work centers around **ComfyUI** and agent-driven creative tools.
+
+I started out building workflows and eventually found myself building the tools around the workflows too.
+
+That now includes custom ComfyUI nodes, workflow management, model management, film-production tooling, continuity systems, reference management, audio and video tools, local LLM infrastructure, CAD and 3D experiments, and AI agents that can work with real project files and applications.
+
+Projects such as **ComfyUI Setup Manager, Story-Film-Skills, ComfyUI-Pi-Agent, Pi-ComfyUI**, and my other ComfyUI projects have grown out of that work.
+
+A big part of what I'm interested in now is making AI agents actually useful for real work. Not just answering questions, but understanding a project, using tools, working with files, keeping track of state, and helping carry something from an idea to a finished result.
+
+### 🪵 RockCreek ShopWorks
+
+I also still like making things that don't require a GPU.
+
+I do woodworking under **RockCreek ShopWorks**, building with both new material and ethically sourced reclaimed or recycled wood.
+
+Woodworking scratches a different version of the same itch as programming. You start with raw material, work within its limitations, solve problems as they come up, and hopefully end up with something useful that will last.
+
+It also gives me an excuse to get away from a computer once in a while.
+
+### 🚀 Now
+
+These days I split my time across open-source software, local AI, ComfyUI, agent systems, media production, music, YouTube, woodworking, and whatever project has managed to get my attention next.
+
+I've been an Eagle Scout, bushcraft YouTuber, community organizer, bail fund founder, CALEB director, radio co-host, project manager, musician, software developer, AI tinkerer, and woodworker.
+
+It probably looks like a strange collection of things from the outside.
+
+From where I'm standing, it's mostly been the same habit repeated for a long time:
+
+**Find something interesting. Learn how it works. Build something. Share what I learned. Move on to the next problem.**
 
 ---
 
