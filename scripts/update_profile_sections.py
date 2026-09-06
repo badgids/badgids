@@ -607,6 +607,33 @@ def replace_marker(text: str, marker: str, body: str) -> tuple[str, bool]:
     return pattern.sub(lambda _: replacement, text, count=1), True
 
 
+def _masked_dynamic_sections(text: str) -> str:
+    """Return README with only dynamic marker bodies masked.
+
+    If before/after masked forms differ, something outside the explicitly permitted
+    dynamic blocks changed and the update must be rejected.
+    """
+    masked = text
+    for marker in (
+        CURRENT_MARKER,
+        CONTRIB_MARKER,
+        SELECTED_GITHUB_MARKER,
+        SELECTED_HF_MARKER,
+    ):
+        pattern = re.compile(
+            rf"(<!-- {re.escape(marker)}:START -->).*?(<!-- {re.escape(marker)}:END -->)",
+            re.DOTALL,
+        )
+        matches = list(pattern.finditer(masked))
+        if len(matches) != 1:
+            raise RuntimeError(
+                f"Expected exactly one {marker} marker block; found {len(matches)}. "
+                "Refusing to modify README.md outside explicit dynamic blocks."
+            )
+        masked = pattern.sub(r"\1\n<DYNAMIC-CONTENT>\n\2", masked, count=1)
+    return masked
+
+
 def update_readme(
     text: str,
     current_body: str,
@@ -614,58 +641,110 @@ def update_readme(
     selected_github_body: str,
     selected_hf_body: str,
 ) -> str:
-    text, current_found = replace_marker(text, CURRENT_MARKER, current_body)
-    text, contrib_found = replace_marker(text, CONTRIB_MARKER, contrib_body)
+    """Update ONLY the four explicit dynamic marker bodies.
 
-    if not current_found or not contrib_found:
-        legacy_pattern = re.compile(
-            r"## 🚀 Currently building:.*?\n---\n\n(?=## About me)",
-            re.DOTALL | re.IGNORECASE,
-        )
-        replacement = (
-            "## 🚀 Currently Working On\n\n"
-            f"{marker_block(CURRENT_MARKER, current_body)}\n\n"
-            "## 🤝 Recently Contributed to\n\n"
-            f"{marker_block(CONTRIB_MARKER, contrib_body)}\n\n"
-            "---\n\n"
-        )
-        if legacy_pattern.search(text):
-            text = legacy_pattern.sub(lambda _: replacement, text, count=1)
-        elif "## About me" in text and not current_found:
-            text = text.replace("## About me", replacement + "## About me", 1)
-        elif not current_found or not contrib_found:
-            raise RuntimeError("Could not locate the activity sections in README.md")
+    No heading, separator, prose, Journey-so-far content, toolkit content, or any
+    other README bytes are permitted to change. Missing/duplicate markers are a
+    hard error rather than a reason to infer or migrate surrounding sections.
+    """
+    original_masked = _masked_dynamic_sections(text)
 
-    selected_section = (
-        "## Selected work\n\n"
-        "### GitHub\n\n"
-        f"{marker_block(SELECTED_GITHUB_MARKER, selected_github_body)}\n\n"
-        "### Hugging Face\n\n"
-        f"{marker_block(SELECTED_HF_MARKER, selected_hf_body)}\n"
+    replacements = (
+        (CURRENT_MARKER, current_body),
+        (CONTRIB_MARKER, contrib_body),
+        (SELECTED_GITHUB_MARKER, selected_github_body),
+        (SELECTED_HF_MARKER, selected_hf_body),
     )
-    selected_pattern = re.compile(
-        r"## Selected work\n\n.*?(?=\nI am especially interested in collaborating on)",
-        re.DOTALL,
-    )
-    if not selected_pattern.search(text):
-        raise RuntimeError("Could not locate the Selected work section in README.md")
-    text = selected_pattern.sub(lambda _: selected_section, text, count=1)
-    return text
+    updated = text
+    for marker, body in replacements:
+        updated, found = replace_marker(updated, marker, body)
+        if not found:
+            raise RuntimeError(
+                f"Missing required marker block {marker}; refusing to modify README.md."
+            )
+
+    if _masked_dynamic_sections(updated) != original_masked:
+        raise RuntimeError(
+            "Safety check failed: content outside the four approved dynamic marker "
+            "blocks changed. README.md was not written."
+        )
+    return updated
 
 
 def self_test() -> None:
-    sample = """# Profile\n\n## 🚀 Currently building: [Old](https://example.com)\n\n> Old\n\n---\n\n## About me\n\nAbout.\n\n---\n\n## Selected work\n\n| Project | Platform | What it explores |\n| --- | --- | --- |\n| Old | GitHub | old |\n\nI am especially interested in collaborating on things.\n"""
+    sample = """# Profile
+
+## 🚀 Currently Working On
+
+<!-- AUTO-CURRENTLY-WORKING-ON:START -->
+old current
+<!-- AUTO-CURRENTLY-WORKING-ON:END -->
+
+## 🤝 Recently Contributed to
+
+<!-- AUTO-RECENT-CONTRIBUTIONS:START -->
+old contrib
+<!-- AUTO-RECENT-CONTRIBUTIONS:END -->
+
+---
+
+## About me
+
+This must never change.
+
+---
+
+## Selected work
+
+### GitHub
+
+<!-- AUTO-SELECTED-GITHUB:START -->
+old github
+<!-- AUTO-SELECTED-GITHUB:END -->
+
+### Hugging Face
+
+<!-- AUTO-SELECTED-HUGGINGFACE:START -->
+old hf
+<!-- AUTO-SELECTED-HUGGINGFACE:END -->
+
+I am especially interested in collaborating on things.
+
+---
+
+## Journey so far
+
+| Era | Focus |
+| --- | --- |
+| **Foundation** | THIS MUST REMAIN BYTE-FOR-BYTE IDENTICAL. |
+
+---
+
+## Core toolkit
+
+DO NOT TOUCH THIS EITHER.
+"""
     current = "### [A](https://github.com/badgids/A)\n\n> A"
     contrib = "### [x/y](https://github.com/x/y)\n\n> Y"
     gh = "| Project | What it explores |\n| --- | --- |\n| **[A](https://github.com/badgids/A)** | A |"
     hf = "| Project | What it explores |\n| --- | --- |\n| **[M](https://huggingface.co/Badgids/M)** | M |"
+
+    before_masked = _masked_dynamic_sections(sample)
     result = update_readme(sample, current, contrib, gh, hf)
-    assert "## 🚀 Currently Working On" in result
-    assert "## 🤝 Recently Contributed to" in result
-    assert "### GitHub" in result and "### Hugging Face" in result
-    assert "| Platform |" not in result
+    assert _masked_dynamic_sections(result) == before_masked
+    assert "| **Foundation** | THIS MUST REMAIN BYTE-FOR-BYTE IDENTICAL. |" in result
+    assert "DO NOT TOUCH THIS EITHER." in result
     result2 = update_readme(result, current, contrib, gh, hf)
     assert result2 == result
+
+    # Missing markers must fail rather than trigger a broad migration.
+    broken = sample.replace("<!-- AUTO-SELECTED-HUGGINGFACE:END -->", "")
+    try:
+        update_readme(broken, current, contrib, gh, hf)
+    except RuntimeError:
+        pass
+    else:
+        raise AssertionError("Missing marker did not fail closed")
 
     fork = {"fork": False, "owner": {"login": "badgids"}, "name": "A"}
     dummy = object.__new__(GitHubClient)
@@ -676,7 +755,7 @@ def self_test() -> None:
     assert not hf_is_owned_by_badgids(
         HuggingFaceWork("M", "https://huggingface.co/SomeoneElse/M", "M")
     )
-    print("Self-test passed.")
+    print("Self-test passed: only explicit marker bodies can change.")
 
 
 def parse_args() -> argparse.Namespace:
