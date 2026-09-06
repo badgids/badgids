@@ -190,47 +190,83 @@ def fetch_external_contributions(username: str) -> list[dict[str, Any]]:
         metadata = api_get_optional(f"{API_ROOT}/repos/{repo_name}")
         if isinstance(metadata, dict):
             contribution["full_name"] = metadata.get("full_name") or repo_name
+            contribution["name"] = metadata.get("name") or repo_name.split("/", 1)[-1]
             contribution["html_url"] = metadata.get("html_url") or github_repo_url(repo_name)
             contribution["description"] = metadata.get("description")
+            contribution["default_branch"] = metadata.get("default_branch") or "main"
+            contribution["language"] = metadata.get("language")
+            contribution["topics"] = metadata.get("topics") or []
 
     return contributions
 
 
-def render_current(repos: Iterable[dict[str, Any]]) -> str:
-    rows = [
-        "| Project | What it is | Last activity |",
-        "| --- | --- | --- |",
+def repo_topics_line(repo: dict[str, Any]) -> str:
+    tags: list[str] = []
+    language = str(repo.get("language") or "").strip()
+    if language:
+        tags.append(language)
+    for topic in repo.get("topics") or []:
+        topic_text = str(topic).strip()
+        if topic_text and topic_text.lower() not in {tag.lower() for tag in tags}:
+            tags.append(topic_text)
+        if len(tags) >= 8:
+            break
+    if not tags:
+        return ""
+    return " · ".join(f"`{tag.replace('`', '')}`" for tag in tags)
+
+
+def render_repo_block(repo: dict[str, Any], *, external: bool = False) -> str:
+    full_name = str(repo.get("full_name") or "").strip()
+    short_name = str(repo.get("name") or "").strip()
+    if not short_name and "/" in full_name:
+        short_name = full_name.split("/", 1)[1]
+    display_name = full_name if external and full_name else (short_name or full_name or "Repository")
+    url = str(repo.get("html_url") or github_repo_url(full_name))
+    description = md_escape(
+        repo.get("description")
+        or ("External open-source project." if external else "Active repository with recent development work.")
+    )
+    default_branch = str(repo.get("default_branch") or "main")
+
+    lines = [
+        f"### [{md_escape(display_name)}]({url})",
+        "",
+        f"> {description}",
+        "",
+        f"[![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)]({url})",
     ]
-    count = 0
-    for repo in repos:
-        count += 1
-        name = md_escape(str(repo.get("name") or repo.get("full_name") or "Repository"))
-        url = repo.get("html_url") or github_repo_url(str(repo.get("full_name", "")))
-        description = md_escape(repo.get("description") or "Active repository with recent development work.")
-        pushed_at = date_only(repo.get("pushed_at"))
-        rows.append(f"| **[{name}]({url})** | {description} | {pushed_at} |")
-    if count == 0:
-        rows.append("| _No qualifying public repositories found._ | — | — |")
-    return "\n".join(rows)
+
+    if full_name:
+        lines.extend(
+            [
+                f"[![License](https://img.shields.io/github/license/{full_name}?style=for-the-badge&labelColor=161B22&color=22D3EE)]({url})",
+                f"[![Last commit](https://img.shields.io/github/last-commit/{full_name}?style=for-the-badge&labelColor=161B22&color=F9A620)]({url}/commits/{default_branch})",
+            ]
+        )
+
+    tags = repo_topics_line(repo)
+    if tags:
+        lines.extend(["", tags])
+
+    return "\n".join(lines)
+
+
+def render_project_blocks(repos: Iterable[dict[str, Any]], *, external: bool = False) -> str:
+    blocks = [render_repo_block(repo, external=external) for repo in repos]
+    if not blocks:
+        if external:
+            return "_No recent public external contribution activity found._"
+        return "_No qualifying public repositories found._"
+    return "\n\n<br>\n\n".join(blocks)
+
+
+def render_current(repos: Iterable[dict[str, Any]]) -> str:
+    return render_project_blocks(repos, external=False)
 
 
 def render_contributions(contributions: Iterable[dict[str, Any]]) -> str:
-    rows = [
-        "| Project | What it is | Latest contribution activity |",
-        "| --- | --- | --- |",
-    ]
-    count = 0
-    for item in contributions:
-        count += 1
-        full_name = md_escape(item.get("full_name") or "Repository")
-        url = item.get("html_url") or github_repo_url(str(item.get("full_name", "")))
-        description = md_escape(item.get("description") or "External open-source project.")
-        contributed_at = date_only(item.get("contributed_at"))
-        rows.append(f"| **[{full_name}]({url})** | {description} | {contributed_at} |")
-    if count == 0:
-        rows.append("| _No recent public external contribution activity found._ | — | — |")
-    return "\n".join(rows)
-
+    return render_project_blocks(contributions, external=True)
 
 def refresh_selected_descriptions(items: Iterable[SelectedWork]) -> list[SelectedWork]:
     refreshed: list[SelectedWork] = []
@@ -255,15 +291,15 @@ def refresh_selected_descriptions(items: Iterable[SelectedWork]) -> list[Selecte
 
 
 def render_selected(items: Iterable[SelectedWork]) -> str:
+    # Preserve the profile's original Selected work presentation: two columns only.
     rows = [
-        "| Project | Platform | What it explores |",
-        "| --- | --- | --- |",
+        "| Project | What it explores |",
+        "| --- | --- |",
     ]
     for item in list(items)[:20]:
         title = md_escape(item.title)
-        platform = md_escape(item.platform)
         summary = md_escape(item.summary)
-        rows.append(f"| **[{title}]({item.url})** | {platform} | {summary} |")
+        rows.append(f"| **[{title}]({item.url})** | {summary} |")
     return "\n".join(rows)
 
 
