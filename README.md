@@ -29,24 +29,26 @@
 
 ---
 
-## 🚀 Currently building: [ComfyUI Setup Manager](https://github.com/badgids/comfyui-setup-manager)
+## 🚀 Currently Working On
 
-> A standalone control center for installing, launching, updating, repairing, inspecting, exporting, importing, and sharing ComfyUI installations, models, and workflows.
+<!-- AUTO-CURRENTLY-WORKING-ON:START -->
+| Project | What it is | Last activity |
+| --- | --- | --- |
+| **[ComfyUI-H3-ExactAudioLock](https://github.com/badgids/ComfyUI-H3-ExactAudioLock)** | ComfyUI custom nodes for deterministic multi-speaker timed audio mixing and exact MiniMax H3 target-audio latent locking. | 2026-09-03 |
+| **[Story-Film-Skills](https://github.com/badgids/Story-Film-Skills)** | Story-Film Skills is a local-first Agent Skills suite for story writing, book development, screenwriting, image/audio/video generation, directing, feature-film production, postproduction, and release delivery. It uses durable project files, stable IDs, deterministic validators, and recoverable workflows. | 2026-08-24 |
+| **[comfyui-setup-manager](https://github.com/badgids/comfyui-setup-manager)** | A standalone application for installing, launching, updating, repairing, inspecting, exporting, importing, and sharing ComfyUI installations, models, and workflows. | 2026-08-21 |
+| **[ComfyUI-Pi-Agent](https://github.com/badgids/ComfyUI-Pi-Agent)** | Pi Agent integration and production assistant for ComfyUI | 2026-08-09 |
+| **[Badgids-pi-statusline](https://github.com/badgids/Badgids-pi-statusline)** | A responsive, three-line custom status footer for the Pi coding agent. It replaces Pi's default footer with a compact dashboard showing the current project, Git state, selected model, token usage, provider, context usage, runtime state, and thinking level. | 2026-07-27 |
+<!-- AUTO-CURRENTLY-WORKING-ON:END -->
 
-[![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/badgids/comfyui-setup-manager)
-[![License](https://img.shields.io/github/license/badgids/comfyui-setup-manager?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/badgids/comfyui-setup-manager/blob/main/LICENSE)
-[![Last commit](https://img.shields.io/github/last-commit/badgids/comfyui-setup-manager?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/badgids/comfyui-setup-manager/commits/main)
+## 🤝 Recently Contributed to
 
-ComfyUI Setup Manager combines a compact **Textual TUI** with a complete automation-friendly **CLI**. It manages multiple ComfyUI installations without forcing every setup to duplicate huge model and workflow libraries.
-
-- Install, launch, update, repair, inspect, roll back, and remove ComfyUI setups.
-- Share models and workflows safely across multiple installations.
-- Export and import portable YAML-based setup profiles and workflow packs.
-- Manage custom nodes, models, LoRAs, workflows, Agent Skills, and MCP definitions.
-- Use every important feature through either the TUI or text, JSON, and YAML CLI output.
-- Validate dependencies and custom-node startup before declaring an installation healthy.
-
-`Python` · `Textual` · `ComfyUI` · `YAML` · `CLI/TUI` · `Linux` · `WSL2` · `Windows`
+<!-- AUTO-RECENT-CONTRIBUTIONS:START -->
+| Project | What it is | Latest contribution activity |
+| --- | --- | --- |
+| **[FlamxGames/godot-ai-assistant-hub](https://github.com/FlamxGames/godot-ai-assistant-hub)** | Embed AI assistants in Godot with the ability to read and write code in Godot's Code Editor. | 2026-09-01 |
+| **[LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler](https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler)** | Neural latent upscaler for Minimax H3 (24ch). Bypasses costly 5B-param VAE decode/encode. Upscale low-res latents directly, then refine. Accelerates high-res video gen, outperforms naive interp. | 2026-08-26 |
+<!-- AUTO-RECENT-CONTRIBUTIONS:END -->
 
 ---
 
@@ -97,13 +99,30 @@ The discipline and outdoor foundation I developed as an **Eagle Scout** still sh
 
 ## Selected work
 
-| Project                                                                       | What it explores                                                                   |
-| ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| **[ComfyUI Setup Manager](https://github.com/badgids/comfyui-setup-manager)** | Portable, repairable, multi-install ComfyUI management through a full TUI and CLI. |
-| **[Gonzo-Chat-7B-GGUF](https://huggingface.co/Badgids/Gonzo-Chat-7B-GGUF)**   | A merged 7B conversational model optimized for local GGUF inference.               |
-| **[Gonzo-Code-7B-GGUF](https://huggingface.co/Badgids/Gonzo-Code-7B-GGUF)**   | A locally runnable merged model focused on coding and agent-oriented work.         |
-| **[OpenKlyde](https://github.com/badgids/OpenKlyde)**                         | An open-source Discord bot project; collaboration and help are welcome.            |
-| **[Transcription App](https://github.com/badgids/transcription-app)**         | Real-time transcription experiments powered by OpenAI Whisper.                     |
+<!-- AUTO-SELECTED-WORK:START -->
+| Project | Platform | What it explores |
+| --- | --- | --- |
+| **[ComfyUI Setup Manager](https://github.com/badgids/comfyui-setup-manager)** | GitHub | A standalone application for installing, launching, updating, repairing, inspecting, exporting, importing, and sharing ComfyUI installations, models, and workflows. |
+| **[Story Film Skills](https://github.com/badgids/Story-Film-Skills)** | GitHub | Story-Film Skills is a local-first Agent Skills suite for story writing, book development, screenwriting, image/audio/video generation, directing, feature-film production, postproduction, and release delivery. It uses durable project files, stable IDs, deterministic validators, and recoverable workflows. |
+| **[ComfyUI Pi Agent](https://github.com/badgids/ComfyUI-Pi-Agent)** | GitHub | Pi Agent integration and production assistant for ComfyUI |
+| **[ComfyUI Scene Camera Action](https://github.com/badgids/ComfyUI-scene-camera-action)** | GitHub | A ComfyUI set of custom nodes to set up threejs interactive scenes to be used as video reference |
+| **[ComfyUI OrbitSheets](https://github.com/badgids/ComfyUI-OrbitSheets)** | GitHub | Character turnaround and location reference sheets from a MiniMax-H3 camera move, with vision-model frame selection. |
+| **[ComfyUI H3 ExactAudioLock](https://github.com/badgids/ComfyUI-H3-ExactAudioLock)** | GitHub | ComfyUI custom nodes for deterministic multi-speaker timed audio mixing and exact MiniMax H3 target-audio latent locking. |
+| **[ComfyUI MiniMax H3 Latent Upscaler](https://github.com/badgids/Comfyui_Minimax_h3_latent_Upscaler)** | GitHub | Neural latent upscaler for Minimax H3 (24ch). Bypasses costly 5B-param VAE decode/encode. Upscale low-res latents directly, then refine. Accelerates high-res video gen, outperforms naive interp. |
+| **[ComfyUI ClipProj](https://github.com/badgids/ComfyUI-ClipProj)** | GitHub | Swap a large text encoder for a small one with a learned linear projection. MiniMax H3 conditioning from 15.7 GB down to 5.2 GB. |
+| **[ACE-Step DAW](https://github.com/badgids/ACE-Step-DAW)** | GitHub | WIP... |
+| **[ACE-Step Data Tool](https://github.com/badgids/Ace-Step_Data-Tool)** | GitHub | Ace-Step Dataset Generator |
+| **[Audacity MCP](https://github.com/badgids/Audacity-MCP)** | GitHub | AudacityMCP connects any MCP-compatible AI assistant to [Audacity](https://www.audacityteam.org/), giving it full control over audio editing through 131 tools and 9 pipelines spanning effects, cleanup, mastering, and more. Talk to your AI assistant and it edits your audio in real-time. |
+| **[ComfyScript](https://github.com/badgids/ComfyScript)** | GitHub | A Python frontend and library for ComfyUI |
+| **[Godot AI](https://github.com/badgids/godot-ai)** | GitHub | Production-grade MCP server and AI tools for the Godot engine. A Snap to install. Totally free and fun. |
+| **[OpenKlyde](https://github.com/badgids/OpenKlyde)** | GitHub | An AI Discord bot that connects to a koboldcpp instance by API calls. Have a more intelligent Clyde Bot of your own making! |
+| **[Transcription App](https://github.com/badgids/transcription-app)** | GitHub | a transcription application that listens to audio input from the microphone using OpenAI's Whisper, transcribes it into text, and simulates typing the transcription in real-time wherever your cursor is on the screen. It can also do realtime translation. |
+| **[stitchmd](https://github.com/badgids/stitchmd)** | GitHub | Stitch multiple Markdown files together into a single document. |
+| **[Gonzo-Chat-7B](https://huggingface.co/Badgids/Gonzo-Chat-7B)** | Hugging Face | A merged 7B conversational model for chat, roleplay, agents, and general local inference. |
+| **[Gonzo-Chat-7B-GGUF](https://huggingface.co/Badgids/Gonzo-Chat-7B-GGUF)** | Hugging Face | GGUF quantizations of Gonzo-Chat-7B for efficient local inference with llama.cpp-compatible runtimes. |
+| **[Gonzo-Code-7B](https://huggingface.co/Badgids/Gonzo-Code-7B)** | Hugging Face | A merged 7B model focused on coding and agent-oriented work. |
+| **[Gonzo-Code-7B-GGUF](https://huggingface.co/Badgids/Gonzo-Code-7B-GGUF)** | Hugging Face | GGUF quantizations of Gonzo-Code-7B for locally runnable coding and agent workflows. |
+<!-- AUTO-SELECTED-WORK:END -->
 
 I am especially interested in collaborating on **machine learning, applied AI, local inference, automation, agent systems, and open-source tools**. Ask me about computer science, programming, ML/AI, ComfyUI, or turning an ambitious idea into a working system.
 
