@@ -1,17 +1,28 @@
 #!/usr/bin/env python3
-"""Refresh dynamic sections in the Badgids GitHub profile README.
+"""Refresh dynamic project sections in the Badgids GitHub profile README.
 
-The two activity sections are generated from public GitHub activity:
-- Currently Working On: the five most recently pushed, non-fork repositories owned by the user.
-- Recently Contributed to: the ten most recent unique external repositories found in the user's public contribution-like events.
+Behavior:
+- Currently Working On: latest 5 qualifying GitHub projects actually worked on by badgids.
+- Recently Contributed to: latest 10 unique external GitHub projects from public contribution events.
+- Selected work / GitHub: curated candidates, up to 20. Original repos qualify automatically.
+  Forks qualify only when the fork is ahead of upstream AND at least one unique commit is
+  attributable to badgids.
+- Selected work / Hugging Face: curated Badgids/* work, up to 20.
 
-Selected Work remains curated, but this script renders the list consistently and refreshes
-GitHub repository descriptions when available. Hugging Face entries are kept alongside GitHub work.
+The activity project blocks intentionally preserve the presentation established by the
+pre-automation README: linked project heading, summary quote, repository/license/last-commit
+badges, overview text, feature bullets, and technology/topic tags.
+
+Safety:
+- Authenticated GitHub API access is required by default.
+- All network collection finishes before README.md is written.
+- Rate-limit/network failures abort without partially rewriting README.md.
 """
 
 from __future__ import annotations
 
 import argparse
+import base64
 import json
 import os
 import re
@@ -27,10 +38,13 @@ API_ROOT = "https://api.github.com"
 PROFILE_REPO_NAME = "badgids"
 CURRENT_LIMIT = 5
 CONTRIBUTION_LIMIT = 10
+SELECTED_GITHUB_LIMIT = 20
+SELECTED_HF_LIMIT = 20
 
 CURRENT_MARKER = "AUTO-CURRENTLY-WORKING-ON"
 CONTRIB_MARKER = "AUTO-RECENT-CONTRIBUTIONS"
-SELECTED_MARKER = "AUTO-SELECTED-WORK"
+SELECTED_GITHUB_MARKER = "AUTO-SELECTED-GITHUB"
+SELECTED_HF_MARKER = "AUTO-SELECTED-HUGGINGFACE"
 
 CONTRIBUTION_EVENT_TYPES = {
     "PushEvent",
@@ -39,165 +53,414 @@ CONTRIBUTION_EVENT_TYPES = {
     "IssuesEvent",
 }
 
-
-@dataclass(frozen=True)
-class SelectedWork:
-    platform: str
-    title: str
-    url: str
-    summary: str
-    github_repo: str | None = None
-
-
-# Curated portfolio: maximum 20 entries, including every public Badgids Hugging Face model.
-SELECTED_WORK: tuple[SelectedWork, ...] = (
-    SelectedWork("GitHub", "ComfyUI Setup Manager", "https://github.com/badgids/comfyui-setup-manager", "Portable, repairable, multi-install ComfyUI management through a full TUI and CLI.", "badgids/comfyui-setup-manager"),
-    SelectedWork("GitHub", "Story Film Skills", "https://github.com/badgids/Story-Film-Skills", "Agent skills and production tooling for structured AI-assisted story and film workflows.", "badgids/Story-Film-Skills"),
-    SelectedWork("GitHub", "ComfyUI Pi Agent", "https://github.com/badgids/ComfyUI-Pi-Agent", "Pi-agent integration and automation for working with ComfyUI.", "badgids/ComfyUI-Pi-Agent"),
-    SelectedWork("GitHub", "ComfyUI Scene Camera Action", "https://github.com/badgids/ComfyUI-scene-camera-action", "Scene, camera, and action tooling for controllable ComfyUI media production.", "badgids/ComfyUI-scene-camera-action"),
-    SelectedWork("GitHub", "ComfyUI OrbitSheets", "https://github.com/badgids/ComfyUI-OrbitSheets", "Multi-view and orbit-sheet generation tools for consistent visual references.", "badgids/ComfyUI-OrbitSheets"),
-    SelectedWork("GitHub", "ComfyUI H3 ExactAudioLock", "https://github.com/badgids/ComfyUI-H3-ExactAudioLock", "Audio-locking utilities for MiniMax H3 video workflows in ComfyUI.", "badgids/ComfyUI-H3-ExactAudioLock"),
-    SelectedWork("GitHub", "ComfyUI MiniMax H3 Latent Upscaler", "https://github.com/badgids/Comfyui_Minimax_h3_latent_Upscaler", "Latent upscaling experiments and workflows for MiniMax H3 generation.", "badgids/Comfyui_Minimax_h3_latent_Upscaler"),
-    SelectedWork("GitHub", "ComfyUI ClipProj", "https://github.com/badgids/ComfyUI-ClipProj", "ComfyUI tooling around CLIP projection and reference-processing workflows.", "badgids/ComfyUI-ClipProj"),
-    SelectedWork("GitHub", "ACE-Step DAW", "https://github.com/badgids/ACE-Step-DAW", "DAW-oriented experimentation and tooling around ACE-Step music generation.", "badgids/ACE-Step-DAW"),
-    SelectedWork("GitHub", "ACE-Step Data Tool", "https://github.com/badgids/Ace-Step_Data-Tool", "Dataset preparation and supporting utilities for ACE-Step workflows.", "badgids/Ace-Step_Data-Tool"),
-    SelectedWork("GitHub", "Audacity MCP", "https://github.com/badgids/Audacity-MCP", "Model Context Protocol integration experiments for controlling Audacity.", "badgids/Audacity-MCP"),
-    SelectedWork("GitHub", "ComfyScript", "https://github.com/badgids/ComfyScript", "Programmatic and scriptable approaches to building and operating ComfyUI workflows.", "badgids/ComfyScript"),
-    SelectedWork("GitHub", "Godot AI", "https://github.com/badgids/godot-ai", "AI-assisted experimentation and tooling around the Godot game engine.", "badgids/godot-ai"),
-    SelectedWork("GitHub", "OpenKlyde", "https://github.com/badgids/OpenKlyde", "An open-source Discord bot project built for experimentation and collaboration.", "badgids/OpenKlyde"),
-    SelectedWork("GitHub", "Transcription App", "https://github.com/badgids/transcription-app", "Real-time transcription experiments powered by OpenAI Whisper.", "badgids/transcription-app"),
-    SelectedWork("GitHub", "stitchmd", "https://github.com/badgids/stitchmd", "Utilities for assembling and working with Markdown content.", "badgids/stitchmd"),
-    SelectedWork("Hugging Face", "Gonzo-Chat-7B", "https://huggingface.co/Badgids/Gonzo-Chat-7B", "A merged 7B conversational model for chat, roleplay, agents, and general local inference."),
-    SelectedWork("Hugging Face", "Gonzo-Chat-7B-GGUF", "https://huggingface.co/Badgids/Gonzo-Chat-7B-GGUF", "GGUF quantizations of Gonzo-Chat-7B for efficient local inference with llama.cpp-compatible runtimes."),
-    SelectedWork("Hugging Face", "Gonzo-Code-7B", "https://huggingface.co/Badgids/Gonzo-Code-7B", "A merged 7B model focused on coding and agent-oriented work."),
-    SelectedWork("Hugging Face", "Gonzo-Code-7B-GGUF", "https://huggingface.co/Badgids/Gonzo-Code-7B-GGUF", "GGUF quantizations of Gonzo-Code-7B for locally runnable coding and agent workflows."),
+# Curated candidate pool. It is NOT an unconditional output list.
+# Every candidate is checked against the current repository metadata each run.
+SELECTED_GITHUB_CANDIDATES: tuple[str, ...] = (
+    "badgids/comfyui-setup-manager",
+    "badgids/Story-Film-Skills",
+    "badgids/ComfyUI-Pi-Agent",
+    "badgids/ComfyUI-scene-camera-action",
+    "badgids/ComfyUI-OrbitSheets",
+    "badgids/ComfyUI-H3-ExactAudioLock",
+    "badgids/ComfyUI-ClipProj",
+    "badgids/ACE-Step-DAW",
+    "badgids/Ace-Step_Data-Tool",
+    "badgids/Audacity-MCP",
+    "badgids/Badgids-pi-statusline",
+    "badgids/OpenKlyde",
+    "badgids/transcription-app",
+    "badgids/stitchmd",
+    "badgids/instrument-tab-converter",
+    "badgids/CondaLauncher",
+    "badgids/ComfyUI-InstructorOllama",
+    "badgids/ComfyUI-MediaMixer",
+    "badgids/WatermarkRemover-AI",
+    "badgids/AutoStoryGen",
+    "badgids/Diffusion-101",
+    "badgids/pic-to-story",
+    "badgids/StoryCrafter",
+    # Fork candidates may remain here: validation determines whether they qualify.
+    "badgids/Comfyui_Minimax_h3_latent_Upscaler",
+    "badgids/ComfyScript",
+    "badgids/godot-ai",
 )
 
 
-def github_headers() -> dict[str, str]:
-    headers = {
-        "Accept": "application/vnd.github+json",
-        "User-Agent": "badgids-profile-readme-updater",
-        "X-GitHub-Api-Version": "2022-11-28",
-    }
-    token = os.environ.get("GITHUB_TOKEN", "").strip()
-    if token:
-        headers["Authorization"] = f"Bearer {token}"
-    return headers
+@dataclass(frozen=True)
+class HuggingFaceWork:
+    title: str
+    url: str
+    summary: str
 
 
-def api_get(url: str) -> Any:
-    request = urllib.request.Request(url, headers=github_headers())
-    try:
-        with urllib.request.urlopen(request, timeout=30) as response:
-            return json.load(response)
-    except urllib.error.HTTPError as exc:
-        detail = exc.read().decode("utf-8", errors="replace")[:500]
-        raise RuntimeError(f"GitHub API request failed ({exc.code}) for {url}: {detail}") from exc
-    except urllib.error.URLError as exc:
-        raise RuntimeError(f"GitHub API request failed for {url}: {exc.reason}") from exc
+# Curated work owned by the Badgids Hugging Face namespace.
+# Add more entries freely; rendering is independently capped at 20.
+SELECTED_HUGGINGFACE: tuple[HuggingFaceWork, ...] = (
+    HuggingFaceWork(
+        "Gonzo-Chat-7B",
+        "https://huggingface.co/Badgids/Gonzo-Chat-7B",
+        "A merged 7B conversational model for chat, roleplay, agents, and general local inference.",
+    ),
+    HuggingFaceWork(
+        "Gonzo-Chat-7B-GGUF",
+        "https://huggingface.co/Badgids/Gonzo-Chat-7B-GGUF",
+        "GGUF quantizations of Gonzo-Chat-7B for efficient local inference with llama.cpp-compatible runtimes.",
+    ),
+    HuggingFaceWork(
+        "Gonzo-Code-7B",
+        "https://huggingface.co/Badgids/Gonzo-Code-7B",
+        "A merged 7B model focused on coding and agent-oriented work.",
+    ),
+    HuggingFaceWork(
+        "Gonzo-Code-7B-GGUF",
+        "https://huggingface.co/Badgids/Gonzo-Code-7B-GGUF",
+        "GGUF quantizations of Gonzo-Code-7B for locally runnable coding and agent workflows.",
+    ),
+)
 
 
-def api_get_optional(url: str) -> Any | None:
-    try:
-        return api_get(url)
-    except RuntimeError as exc:
-        print(f"warning: {exc}", file=sys.stderr)
-        return None
+class GitHubAPIError(RuntimeError):
+    def __init__(self, url: str, status: int | None, detail: str):
+        self.url = url
+        self.status = status
+        self.detail = detail
+        label = f"HTTP {status}" if status is not None else "network error"
+        super().__init__(f"GitHub API {label} for {url}: {detail}")
 
 
-def date_only(value: str | None) -> str:
-    if not value:
-        return "—"
-    return value[:10]
+class GitHubClient:
+    def __init__(self, token: str, *, allow_unauthenticated: bool = False):
+        self.token = token.strip()
+        self.allow_unauthenticated = allow_unauthenticated
+        self.cache: dict[str, Any] = {}
+        self.request_count = 0
+        if not self.token and not allow_unauthenticated:
+            raise RuntimeError(
+                "Authenticated GitHub API access is required. Set GITHUB_TOKEN or run through "
+                "the repository's GitHub Actions workflow."
+            )
+
+    def headers(self) -> dict[str, str]:
+        headers = {
+            "Accept": "application/vnd.github+json",
+            "User-Agent": "badgids-profile-readme-updater",
+            "X-GitHub-Api-Version": "2022-11-28",
+        }
+        if self.token:
+            headers["Authorization"] = f"Bearer {self.token}"
+        return headers
+
+    def get(self, url: str, *, optional_statuses: tuple[int, ...] = ()) -> Any | None:
+        if url in self.cache:
+            return self.cache[url]
+
+        request = urllib.request.Request(url, headers=self.headers())
+        try:
+            self.request_count += 1
+            with urllib.request.urlopen(request, timeout=30) as response:
+                result = json.load(response)
+        except urllib.error.HTTPError as exc:
+            detail = exc.read().decode("utf-8", errors="replace")[:800]
+            if exc.code in optional_statuses:
+                self.cache[url] = None
+                return None
+            if exc.code in (403, 429) and "rate limit" in detail.lower():
+                reset = exc.headers.get("X-RateLimit-Reset") if exc.headers else None
+                if reset:
+                    detail += f" (rate-limit reset epoch: {reset})"
+            raise GitHubAPIError(url, exc.code, detail) from exc
+        except urllib.error.URLError as exc:
+            raise GitHubAPIError(url, None, str(exc.reason)) from exc
+
+        self.cache[url] = result
+        return result
 
 
 def md_escape(value: str | None) -> str:
     if not value:
         return "—"
-    return " ".join(value.replace("|", r"\|").split())
+    return " ".join(str(value).replace("|", r"\|").split())
 
 
 def github_repo_url(full_name: str) -> str:
     return f"https://github.com/{full_name}"
 
 
-def fetch_current_repositories(username: str) -> list[dict[str, Any]]:
+def actor_matches(commit: dict[str, Any], username: str) -> bool:
+    target = username.lower()
+    for key in ("author", "committer"):
+        actor = commit.get(key)
+        if isinstance(actor, dict) and str(actor.get("login", "")).lower() == target:
+            return True
+
+    nested = commit.get("commit")
+    if isinstance(nested, dict):
+        for key in ("author", "committer"):
+            actor = nested.get(key)
+            if not isinstance(actor, dict):
+                continue
+            name = str(actor.get("name", "")).strip().lower()
+            email = str(actor.get("email", "")).strip().lower()
+            if name == target or email.startswith(target + "@") or email.startswith(target + "+"):
+                return True
+    return False
+
+
+def list_owned_repositories(client: GitHubClient, username: str) -> list[dict[str, Any]]:
+    """Fetch the user's public repository inventory once and reuse it everywhere."""
     encoded = urllib.parse.quote(username)
-    url = f"{API_ROOT}/users/{encoded}/repos?type=owner&sort=pushed&direction=desc&per_page=100&page=1"
-    repos = api_get(url)
-    if not isinstance(repos, list):
-        raise RuntimeError("Unexpected GitHub response while listing owned repositories")
-
-    username_lower = username.lower()
-    eligible = [
-        repo
-        for repo in repos
-        if str(repo.get("owner", {}).get("login", "")).lower() == username_lower
-        and not repo.get("fork", False)
-        and not repo.get("archived", False)
-        and str(repo.get("name", "")).lower() != PROFILE_REPO_NAME.lower()
-    ]
-    eligible.sort(key=lambda repo: repo.get("pushed_at") or "", reverse=True)
-    return eligible[:CURRENT_LIMIT]
+    repos: list[dict[str, Any]] = []
+    for page in range(1, 11):
+        url = (
+            f"{API_ROOT}/users/{encoded}/repos"
+            f"?type=owner&sort=pushed&direction=desc&per_page=100&page={page}"
+        )
+        batch = client.get(url)
+        if not isinstance(batch, list):
+            raise RuntimeError("Unexpected GitHub response while listing owned repositories")
+        repos.extend(item for item in batch if isinstance(item, dict))
+        if len(batch) < 100:
+            break
+    return repos
 
 
-def fetch_external_contributions(username: str) -> list[dict[str, Any]]:
+def fetch_full_repo(client: GitHubClient, repo: dict[str, Any]) -> dict[str, Any]:
+    full_name = str(repo.get("full_name") or "").strip()
+    if not full_name:
+        return repo
+    data = client.get(f"{API_ROOT}/repos/{full_name}")
+    return data if isinstance(data, dict) else repo
+
+
+def fork_has_material_user_changes(
+    client: GitHubClient, repo: dict[str, Any], username: str
+) -> bool:
+    """A fork qualifies only if it is ahead of upstream with a user-attributable commit."""
+    if not repo.get("fork", False):
+        return True
+
+    full_repo = repo
+    parent = full_repo.get("parent")
+    if not isinstance(parent, dict):
+        full_repo = fetch_full_repo(client, repo)
+        parent = full_repo.get("parent")
+    if not isinstance(parent, dict):
+        return False
+
+    parent_full_name = str(parent.get("full_name") or "").strip()
+    parent_branch = str(parent.get("default_branch") or "main").strip()
+    fork_branch = str(full_repo.get("default_branch") or "main").strip()
+    if not parent_full_name:
+        return False
+
+    comparison = f"{parent_branch}...{username}:{fork_branch}"
+    encoded_comparison = urllib.parse.quote(comparison, safe=":.")
+    data = client.get(
+        f"{API_ROOT}/repos/{parent_full_name}/compare/{encoded_comparison}",
+        optional_statuses=(404, 409, 422),
+    )
+    if not isinstance(data, dict) or int(data.get("ahead_by") or 0) <= 0:
+        return False
+
+    commits = data.get("commits") or []
+    return any(
+        isinstance(commit, dict) and actor_matches(commit, username)
+        for commit in commits
+    )
+
+
+def qualifies_as_user_work(
+    client: GitHubClient, repo: dict[str, Any], username: str
+) -> bool:
+    owner = str(repo.get("owner", {}).get("login", "")).lower()
+    if owner != username.lower():
+        return False
+    if repo.get("archived", False):
+        return False
+    if str(repo.get("name", "")).lower() == PROFILE_REPO_NAME.lower():
+        return False
+    return fork_has_material_user_changes(client, repo, username)
+
+
+def select_current_repositories(
+    client: GitHubClient, repos: Iterable[dict[str, Any]], username: str
+) -> list[dict[str, Any]]:
+    ordered = sorted(repos, key=lambda repo: repo.get("pushed_at") or "", reverse=True)
+    selected: list[dict[str, Any]] = []
+    for repo in ordered:
+        if len(selected) >= CURRENT_LIMIT:
+            break
+        if qualifies_as_user_work(client, repo, username):
+            selected.append(repo)
+    return selected
+
+
+def fetch_external_contributions(
+    client: GitHubClient, username: str
+) -> list[dict[str, Any]]:
     username_lower = username.lower()
     seen: set[str] = set()
     contributions: list[dict[str, Any]] = []
 
-    # GitHub's public events feed exposes up to the most recent 300 events.
     for page in range(1, 4):
         encoded = urllib.parse.quote(username)
-        url = f"{API_ROOT}/users/{encoded}/events/public?per_page=100&page={page}"
-        events = api_get(url)
+        events = client.get(
+            f"{API_ROOT}/users/{encoded}/events/public?per_page=100&page={page}"
+        )
         if not isinstance(events, list):
             raise RuntimeError("Unexpected GitHub response while listing public events")
         if not events:
             break
 
         for event in events:
-            if event.get("type") not in CONTRIBUTION_EVENT_TYPES:
+            if not isinstance(event, dict) or event.get("type") not in CONTRIBUTION_EVENT_TYPES:
                 continue
             repo_name = str(event.get("repo", {}).get("name", "")).strip()
             if "/" not in repo_name:
                 continue
             owner, _ = repo_name.split("/", 1)
-            if owner.lower() == username_lower:
-                continue
-            key = repo_name.lower()
-            if key in seen:
+            if owner.lower() == username_lower or repo_name.lower() in seen:
                 continue
 
-            seen.add(key)
-            contributions.append(
-                {
-                    "full_name": repo_name,
-                    "html_url": github_repo_url(repo_name),
-                    "description": None,
-                    "contributed_at": event.get("created_at"),
-                }
+            metadata = client.get(
+                f"{API_ROOT}/repos/{repo_name}", optional_statuses=(404, 451)
             )
+            if not isinstance(metadata, dict):
+                continue
+            item = dict(metadata)
+            item["contributed_at"] = event.get("created_at")
+            contributions.append(item)
+            seen.add(repo_name.lower())
             if len(contributions) >= CONTRIBUTION_LIMIT:
-                break
-
-        if len(contributions) >= CONTRIBUTION_LIMIT:
-            break
-
-    for contribution in contributions:
-        repo_name = contribution["full_name"]
-        metadata = api_get_optional(f"{API_ROOT}/repos/{repo_name}")
-        if isinstance(metadata, dict):
-            contribution["full_name"] = metadata.get("full_name") or repo_name
-            contribution["name"] = metadata.get("name") or repo_name.split("/", 1)[-1]
-            contribution["html_url"] = metadata.get("html_url") or github_repo_url(repo_name)
-            contribution["description"] = metadata.get("description")
-            contribution["default_branch"] = metadata.get("default_branch") or "main"
-            contribution["language"] = metadata.get("language")
-            contribution["topics"] = metadata.get("topics") or []
+                return contributions
 
     return contributions
+
+
+def fetch_repo_readme(client: GitHubClient, full_name: str) -> str:
+    data = client.get(
+        f"{API_ROOT}/repos/{full_name}/readme", optional_statuses=(404, 409)
+    )
+    if not isinstance(data, dict) or not data.get("content"):
+        return ""
+    try:
+        return base64.b64decode(str(data["content"])).decode("utf-8", errors="replace")
+    except Exception:
+        return ""
+
+
+def clean_inline_markdown(text: str) -> str:
+    text = re.sub(r"!\[[^\]]*\]\([^)]+\)", "", text)
+    text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)
+    text = re.sub(r"<[^>]+>", " ", text)
+    text = re.sub(r"`([^`]+)`", r"\1", text)
+    text = re.sub(r"[*_~]+", "", text)
+    return " ".join(text.split()).strip()
+
+
+def extract_readme_details(readme: str, fallback: str) -> tuple[str, list[str]]:
+    """Extract an overview paragraph and useful feature bullets from a README."""
+    if not readme:
+        return fallback, []
+
+    text = re.sub(r"\A---\s*\n.*?\n---\s*\n", "", readme, flags=re.DOTALL)
+    lines = text.splitlines()
+
+    cleaned: list[str] = []
+    in_fence = False
+    for raw in lines:
+        line = raw.rstrip()
+        if line.lstrip().startswith("```"):
+            in_fence = not in_fence
+            continue
+        if in_fence:
+            continue
+        stripped = line.strip()
+        if not stripped:
+            cleaned.append("")
+            continue
+        if stripped.startswith(("![", "[![", "<img", "<picture", "<div align=", "<p align=")):
+            continue
+        cleaned.append(line)
+
+    paragraphs: list[str] = []
+    buf: list[str] = []
+    for line in cleaned:
+        stripped = line.strip()
+        if not stripped:
+            if buf:
+                paragraph = clean_inline_markdown(" ".join(buf))
+                if paragraph:
+                    paragraphs.append(paragraph)
+                buf = []
+            continue
+        if stripped.startswith("#"):
+            if buf:
+                paragraph = clean_inline_markdown(" ".join(buf))
+                if paragraph:
+                    paragraphs.append(paragraph)
+                buf = []
+            continue
+        if stripped.startswith(("-", "* ", "+ ", "> ", "|")):
+            if buf:
+                paragraph = clean_inline_markdown(" ".join(buf))
+                if paragraph:
+                    paragraphs.append(paragraph)
+                buf = []
+            continue
+        lowered = stripped.lower()
+        if lowered.startswith(("table of contents", "contents", "installation", "requirements")):
+            continue
+        buf.append(stripped)
+    if buf:
+        paragraph = clean_inline_markdown(" ".join(buf))
+        if paragraph:
+            paragraphs.append(paragraph)
+
+    overview = fallback
+    for paragraph in paragraphs:
+        low = paragraph.lower()
+        if len(paragraph) >= 40 and not low.startswith(("license", "copyright", "build status")):
+            overview = paragraph[:700].rstrip()
+            break
+
+    bullets: list[str] = []
+    preferred = False
+    seen_preferred_heading = False
+    for raw in cleaned:
+        stripped = raw.strip()
+        if stripped.startswith("#"):
+            heading = clean_inline_markdown(stripped.lstrip("#").strip()).lower()
+            if any(
+                key in heading
+                for key in ("feature", "highlight", "capabilit", "what it does", "what this")
+            ):
+                preferred = True
+                seen_preferred_heading = True
+                continue
+            if preferred:
+                break
+            continue
+        if preferred and re.match(r"^[-*+]\s+", stripped):
+            item = clean_inline_markdown(re.sub(r"^[-*+]\s+", "", stripped))
+            if 8 <= len(item) <= 260:
+                bullets.append(item)
+                if len(bullets) >= 6:
+                    break
+
+    if not bullets and not seen_preferred_heading:
+        for raw in cleaned:
+            stripped = raw.strip()
+            if re.match(r"^[-*+]\s+", stripped):
+                item = clean_inline_markdown(re.sub(r"^[-*+]\s+", "", stripped))
+                if 12 <= len(item) <= 220 and not item.lower().startswith(
+                    ("license", "install", "pip ")
+                ):
+                    bullets.append(item)
+                    if len(bullets) >= 6:
+                        break
+
+    return overview, bullets
 
 
 def repo_topics_line(repo: dict[str, Any]) -> str:
@@ -211,95 +474,121 @@ def repo_topics_line(repo: dict[str, Any]) -> str:
             tags.append(topic_text)
         if len(tags) >= 8:
             break
-    if not tags:
-        return ""
     return " · ".join(f"`{tag.replace('`', '')}`" for tag in tags)
 
 
-def render_repo_block(repo: dict[str, Any], *, external: bool = False) -> str:
+def render_repo_block(
+    client: GitHubClient, repo: dict[str, Any], *, external: bool = False
+) -> str:
     full_name = str(repo.get("full_name") or "").strip()
-    short_name = str(repo.get("name") or "").strip()
-    if not short_name and "/" in full_name:
-        short_name = full_name.split("/", 1)[1]
-    display_name = full_name if external and full_name else (short_name or full_name or "Repository")
+    short_name = str(repo.get("name") or full_name.split("/")[-1] or "Repository").strip()
+    display_name = full_name if external else short_name
     url = str(repo.get("html_url") or github_repo_url(full_name))
     description = md_escape(
         repo.get("description")
         or ("External open-source project." if external else "Active repository with recent development work.")
     )
     default_branch = str(repo.get("default_branch") or "main")
+    readme = fetch_repo_readme(client, full_name)
+    overview, features = extract_readme_details(readme, description)
 
     lines = [
-        f"### [{md_escape(display_name)}]({url})",
+        f"### [{display_name}]({url})",
         "",
         f"> {description}",
         "",
         f"[![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)]({url})",
+        f"[![License](https://img.shields.io/github/license/{full_name}?style=for-the-badge&labelColor=161B22&color=22D3EE)]({url}/blob/{default_branch}/LICENSE)",
+        f"[![Last commit](https://img.shields.io/github/last-commit/{full_name}?style=for-the-badge&labelColor=161B22&color=F9A620)]({url}/commits/{default_branch})",
+        "",
+        overview,
     ]
-
-    if full_name:
-        lines.extend(
-            [
-                f"[![License](https://img.shields.io/github/license/{full_name}?style=for-the-badge&labelColor=161B22&color=22D3EE)]({url})",
-                f"[![Last commit](https://img.shields.io/github/last-commit/{full_name}?style=for-the-badge&labelColor=161B22&color=F9A620)]({url}/commits/{default_branch})",
-            ]
-        )
+    if features:
+        lines.append("")
+        lines.extend(f"- {feature}" for feature in features)
 
     tags = repo_topics_line(repo)
     if tags:
         lines.extend(["", tags])
+    return "\n".join(lines).rstrip()
 
-    return "\n".join(lines)
 
-
-def render_project_blocks(repos: Iterable[dict[str, Any]], *, external: bool = False) -> str:
-    blocks = [render_repo_block(repo, external=external) for repo in repos]
+def render_project_blocks(
+    client: GitHubClient, repos: Iterable[dict[str, Any]], *, external: bool = False
+) -> str:
+    blocks = [render_repo_block(client, repo, external=external) for repo in repos]
     if not blocks:
-        if external:
-            return "_No recent public external contribution activity found._"
-        return "_No qualifying public repositories found._"
+        return "_No qualifying public projects found._"
     return "\n\n<br>\n\n".join(blocks)
 
 
-def render_current(repos: Iterable[dict[str, Any]]) -> str:
-    return render_project_blocks(repos, external=False)
+def select_github_work(
+    client: GitHubClient,
+    repo_inventory: Iterable[dict[str, Any]],
+    username: str,
+) -> list[dict[str, Any]]:
+    repo_map = {
+        str(repo.get("full_name") or "").lower(): repo
+        for repo in repo_inventory
+        if repo.get("full_name")
+    }
+    selected: list[dict[str, Any]] = []
+    seen: set[str] = set()
 
-
-def render_contributions(contributions: Iterable[dict[str, Any]]) -> str:
-    return render_project_blocks(contributions, external=True)
-
-def refresh_selected_descriptions(items: Iterable[SelectedWork]) -> list[SelectedWork]:
-    refreshed: list[SelectedWork] = []
-    for item in items:
-        if not item.github_repo:
-            refreshed.append(item)
+    for full_name in SELECTED_GITHUB_CANDIDATES:
+        if len(selected) >= SELECTED_GITHUB_LIMIT:
+            break
+        key = full_name.lower()
+        if key in seen:
             continue
-        metadata = api_get_optional(f"{API_ROOT}/repos/{item.github_repo}")
-        description = item.summary
-        if isinstance(metadata, dict) and metadata.get("description"):
-            description = str(metadata["description"])
-        refreshed.append(
-            SelectedWork(
-                platform=item.platform,
-                title=item.title,
-                url=item.url,
-                summary=description,
-                github_repo=item.github_repo,
-            )
+        seen.add(key)
+        repo = repo_map.get(key)
+        if not isinstance(repo, dict):
+            continue
+        if qualifies_as_user_work(client, repo, username):
+            selected.append(repo)
+
+    return selected
+
+
+def render_selected_github(repos: Iterable[dict[str, Any]]) -> str:
+    rows = ["| Project | What it explores |", "| --- | --- |"]
+    count = 0
+    for repo in repos:
+        if count >= SELECTED_GITHUB_LIMIT:
+            break
+        count += 1
+        name = md_escape(repo.get("name") or repo.get("full_name") or "Repository")
+        url = str(repo.get("html_url") or github_repo_url(str(repo.get("full_name") or "")))
+        summary = md_escape(repo.get("description") or "Open-source project by Badgids.")
+        rows.append(f"| **[{name}]({url})** | {summary} |")
+    if count == 0:
+        rows.append("| _No qualifying selected GitHub projects found._ | — |")
+    return "\n".join(rows)
+
+
+def hf_is_owned_by_badgids(item: HuggingFaceWork) -> bool:
+    parsed = urllib.parse.urlparse(item.url)
+    if parsed.netloc.lower() != "huggingface.co":
+        return False
+    path = parsed.path.strip("/")
+    return path.lower().startswith("badgids/") and len(path.split("/")) >= 2
+
+
+def render_selected_huggingface(items: Iterable[HuggingFaceWork]) -> str:
+    rows = ["| Project | What it explores |", "| --- | --- |"]
+    count = 0
+    for item in items:
+        if count >= SELECTED_HF_LIMIT:
+            break
+        if not hf_is_owned_by_badgids(item):
+            continue
+        count += 1
+        rows.append(
+            f"| **[{md_escape(item.title)}]({item.url})** | {md_escape(item.summary)} |"
         )
-    return refreshed
-
-
-def render_selected(items: Iterable[SelectedWork]) -> str:
-    # Preserve the profile's original Selected work presentation: two columns only.
-    rows = [
-        "| Project | What it explores |",
-        "| --- | --- |",
-    ]
-    for item in list(items)[:20]:
-        title = md_escape(item.title)
-        summary = md_escape(item.summary)
-        rows.append(f"| **[{title}]({item.url})** | {summary} |")
+    if count == 0:
+        rows.append("| _No selected Hugging Face projects found._ | — |")
     return "\n".join(rows)
 
 
@@ -318,11 +607,13 @@ def replace_marker(text: str, marker: str, body: str) -> tuple[str, bool]:
     return pattern.sub(lambda _: replacement, text, count=1), True
 
 
-def update_readme(text: str, current_body: str, contrib_body: str, selected_body: str) -> str:
-    current_block = marker_block(CURRENT_MARKER, current_body)
-    contrib_block = marker_block(CONTRIB_MARKER, contrib_body)
-    selected_block = marker_block(SELECTED_MARKER, selected_body)
-
+def update_readme(
+    text: str,
+    current_body: str,
+    contrib_body: str,
+    selected_github_body: str,
+    selected_hf_body: str,
+) -> str:
     text, current_found = replace_marker(text, CURRENT_MARKER, current_body)
     text, contrib_found = replace_marker(text, CONTRIB_MARKER, contrib_body)
 
@@ -331,34 +622,61 @@ def update_readme(text: str, current_body: str, contrib_body: str, selected_body
             r"## 🚀 Currently building:.*?\n---\n\n(?=## About me)",
             re.DOTALL | re.IGNORECASE,
         )
-        activity_sections = (
+        replacement = (
             "## 🚀 Currently Working On\n\n"
-            f"{current_block}\n\n"
+            f"{marker_block(CURRENT_MARKER, current_body)}\n\n"
             "## 🤝 Recently Contributed to\n\n"
-            f"{contrib_block}\n\n"
+            f"{marker_block(CONTRIB_MARKER, contrib_body)}\n\n"
             "---\n\n"
         )
         if legacy_pattern.search(text):
-            text = legacy_pattern.sub(lambda _: activity_sections, text, count=1)
-        elif not current_found and "## About me" in text:
-            text = text.replace("## About me", activity_sections + "## About me", 1)
-        else:
-            if not current_found:
-                raise RuntimeError("Could not locate the legacy Currently building section in README.md")
+            text = legacy_pattern.sub(lambda _: replacement, text, count=1)
+        elif "## About me" in text and not current_found:
+            text = text.replace("## About me", replacement + "## About me", 1)
+        elif not current_found or not contrib_found:
+            raise RuntimeError("Could not locate the activity sections in README.md")
 
-    text, selected_found = replace_marker(text, SELECTED_MARKER, selected_body)
-    if not selected_found:
-        selected_pattern = re.compile(
-            r"## Selected work\n\n.*?(?=\nI am especially interested in collaborating on)",
-            re.DOTALL,
-        )
-        replacement = "## Selected work\n\n" + selected_block + "\n"
-        if selected_pattern.search(text):
-            text = selected_pattern.sub(lambda _: replacement, text, count=1)
-        else:
-            raise RuntimeError("Could not locate the Selected work section in README.md")
-
+    selected_section = (
+        "## Selected work\n\n"
+        "### GitHub\n\n"
+        f"{marker_block(SELECTED_GITHUB_MARKER, selected_github_body)}\n\n"
+        "### Hugging Face\n\n"
+        f"{marker_block(SELECTED_HF_MARKER, selected_hf_body)}\n"
+    )
+    selected_pattern = re.compile(
+        r"## Selected work\n\n.*?(?=\nI am especially interested in collaborating on)",
+        re.DOTALL,
+    )
+    if not selected_pattern.search(text):
+        raise RuntimeError("Could not locate the Selected work section in README.md")
+    text = selected_pattern.sub(lambda _: selected_section, text, count=1)
     return text
+
+
+def self_test() -> None:
+    sample = """# Profile\n\n## 🚀 Currently building: [Old](https://example.com)\n\n> Old\n\n---\n\n## About me\n\nAbout.\n\n---\n\n## Selected work\n\n| Project | Platform | What it explores |\n| --- | --- | --- |\n| Old | GitHub | old |\n\nI am especially interested in collaborating on things.\n"""
+    current = "### [A](https://github.com/badgids/A)\n\n> A"
+    contrib = "### [x/y](https://github.com/x/y)\n\n> Y"
+    gh = "| Project | What it explores |\n| --- | --- |\n| **[A](https://github.com/badgids/A)** | A |"
+    hf = "| Project | What it explores |\n| --- | --- |\n| **[M](https://huggingface.co/Badgids/M)** | M |"
+    result = update_readme(sample, current, contrib, gh, hf)
+    assert "## 🚀 Currently Working On" in result
+    assert "## 🤝 Recently Contributed to" in result
+    assert "### GitHub" in result and "### Hugging Face" in result
+    assert "| Platform |" not in result
+    result2 = update_readme(result, current, contrib, gh, hf)
+    assert result2 == result
+
+    fork = {"fork": False, "owner": {"login": "badgids"}, "name": "A"}
+    dummy = object.__new__(GitHubClient)
+    assert qualifies_as_user_work(dummy, fork, "badgids")
+    assert hf_is_owned_by_badgids(
+        HuggingFaceWork("M", "https://huggingface.co/Badgids/M", "M")
+    )
+    assert not hf_is_owned_by_badgids(
+        HuggingFaceWork("M", "https://huggingface.co/SomeoneElse/M", "M")
+    )
+    print("Self-test passed.")
 
 
 def parse_args() -> argparse.Namespace:
@@ -369,33 +687,71 @@ def parse_args() -> argparse.Namespace:
         default=os.environ.get("GITHUB_USERNAME", "badgids"),
         help="GitHub username whose activity should populate the profile",
     )
+    parser.add_argument(
+        "--allow-unauthenticated",
+        action="store_true",
+        help="Allow unauthenticated GitHub API requests (not recommended).",
+    )
+    parser.add_argument("--self-test", action="store_true", help="Run offline self-tests and exit.")
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
+    if args.self_test:
+        self_test()
+        return 0
+
+    token = os.environ.get("GITHUB_TOKEN", "")
+    try:
+        client = GitHubClient(token, allow_unauthenticated=args.allow_unauthenticated)
+    except RuntimeError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+
     readme_path = Path(args.readme)
     original = readme_path.read_text(encoding="utf-8")
 
-    current = fetch_current_repositories(args.username)
-    contributions = fetch_external_contributions(args.username)
-    selected = refresh_selected_descriptions(SELECTED_WORK)
+    try:
+        # Collect everything first. README.md is not written unless ALL required collection succeeds.
+        inventory = list_owned_repositories(client, args.username)
+        current = select_current_repositories(client, inventory, args.username)
+        contributions = fetch_external_contributions(client, args.username)
+        selected_github = select_github_work(client, inventory, args.username)
 
-    updated = update_readme(
-        original,
-        render_current(current),
-        render_contributions(contributions),
-        render_selected(selected),
-    )
+        current_body = render_project_blocks(client, current, external=False)
+        contrib_body = render_project_blocks(client, contributions, external=True)
+        selected_github_body = render_selected_github(selected_github)
+        selected_hf_body = render_selected_huggingface(SELECTED_HUGGINGFACE)
+
+        updated = update_readme(
+            original,
+            current_body,
+            contrib_body,
+            selected_github_body,
+            selected_hf_body,
+        )
+    except (GitHubAPIError, RuntimeError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        print("README.md was not changed.", file=sys.stderr)
+        return 1
 
     if updated != original:
         readme_path.write_text(updated, encoding="utf-8")
+        hf_count = min(
+            sum(1 for item in SELECTED_HUGGINGFACE if hf_is_owned_by_badgids(item)),
+            SELECTED_HF_LIMIT,
+        )
         print(
             f"Updated {readme_path}: {len(current)} current projects, "
-            f"{len(contributions)} external contribution projects, {len(selected)} selected work entries."
+            f"{len(contributions)} external contribution projects, "
+            f"{len(selected_github)} selected GitHub projects, "
+            f"{hf_count} selected Hugging Face projects."
         )
     else:
         print(f"{readme_path} is already current.")
+
+    print(f"GitHub API requests used this run: {client.request_count}")
     return 0
 
 

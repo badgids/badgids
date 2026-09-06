@@ -37,8 +37,17 @@
 > ComfyUI custom nodes for deterministic multi-speaker timed audio mixing and exact MiniMax H3 target-audio latent locking.
 
 [![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/badgids/ComfyUI-H3-ExactAudioLock)
-[![License](https://img.shields.io/github/license/badgids/ComfyUI-H3-ExactAudioLock?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/badgids/ComfyUI-H3-ExactAudioLock)
+[![License](https://img.shields.io/github/license/badgids/ComfyUI-H3-ExactAudioLock?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/badgids/ComfyUI-H3-ExactAudioLock/blob/main/LICENSE)
 [![Last commit](https://img.shields.io/github/last-commit/badgids/ComfyUI-H3-ExactAudioLock?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/badgids/ComfyUI-H3-ExactAudioLock/commits/main)
+
+Author/Developer: Alan Guice (Badgids) Copyright: © 2026 Alan Guice (Badgids). License: MIT License
+
+- Locks an exact user-controlled waveform into MiniMax H3's target audio latent.
+- Keeps H3 video denoisable while the target audio stream remains fixed.
+- Accepts an effectively unlimited number of timed audio events through ComfyUI's native Autogrow inputs.
+- Places every source on H3's 24 fps target-video timeline using deterministic integer frame-to-sample conversion.
+- Mixes multiple speakers or sound sources sample-accurately into one H3 target waveform.
+- Supports overlapping dialogue and layered audio.
 
 `Python`
 
@@ -49,10 +58,33 @@
 > Story-Film Skills is a local-first Agent Skills suite for story writing, book development, screenwriting, image/audio/video generation, directing, feature-film production, postproduction, and release delivery. It uses durable project files, stable IDs, deterministic validators, and recoverable workflows.
 
 [![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/badgids/Story-Film-Skills)
-[![License](https://img.shields.io/github/license/badgids/Story-Film-Skills?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/badgids/Story-Film-Skills)
+[![License](https://img.shields.io/github/license/badgids/Story-Film-Skills?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/badgids/Story-Film-Skills/blob/main/LICENSE)
 [![Last commit](https://img.shields.io/github/last-commit/badgids/Story-Film-Skills?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/badgids/Story-Film-Skills/commits/main)
 
+Author/Developer: Alan Guice (Badgids) License: Apache License 2.0 Copyright © 2026 Alan Guice (Badgids).
+
 `Python` · `ai` · `ai-agent` · `ai-coding` · `ai-tools` · `comfyui` · `film` · `film-editing`
+
+<br>
+
+### [ComfyUI-scene-camera-action](https://github.com/badgids/ComfyUI-scene-camera-action)
+
+> A ComfyUI set of custom nodes to set up threejs interactive scenes to be used as video reference
+
+[![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/badgids/ComfyUI-scene-camera-action)
+[![License](https://img.shields.io/github/license/badgids/ComfyUI-scene-camera-action?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/badgids/ComfyUI-scene-camera-action/blob/dev/docs/LICENSE)
+[![Last commit](https://img.shields.io/github/last-commit/badgids/ComfyUI-scene-camera-action?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/badgids/ComfyUI-scene-camera-action/commits/dev/docs)
+
+An interactive 3D scene staging, actor acting, and camera directing suite of custom nodes for ComfyUI.
+
+- Multi-Actor Chaining: Sequence and record multiple independent actors (humanoids and vehicles) on the same stage with synchronized playback.
+- Camera Spring Arm (Anti-Collision): Real-time obstacle avoidance prevents camera clipping against walls and geometry during dynamic camera moves.
+- Actor Color Customization: Dynamic mesh coloring to visually distinguish different actors across the 3D viewport and node timeline.
+- Universal Stage Builder: Universal 3D geometric engine with 5 core primitives and new presets (courthousesquare, gasstation).
+- Vue.js Architecture: Modernized modular reactive UI components (StagingWidget, ActingWidget, DirectingWidget).
+- Animated 3D Humanoid Model: Custom 3D human model with bone structure and armature animations.
+
+`JavaScript`
 
 <br>
 
@@ -61,8 +93,17 @@
 > A standalone application for installing, launching, updating, repairing, inspecting, exporting, importing, and sharing ComfyUI installations, models, and workflows.
 
 [![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/badgids/comfyui-setup-manager)
-[![License](https://img.shields.io/github/license/badgids/comfyui-setup-manager?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/badgids/comfyui-setup-manager)
+[![License](https://img.shields.io/github/license/badgids/comfyui-setup-manager?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/badgids/comfyui-setup-manager/blob/main/LICENSE)
 [![Last commit](https://img.shields.io/github/last-commit/badgids/comfyui-setup-manager?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/badgids/comfyui-setup-manager/commits/main)
+
+Author and creator: Alan Guice (Badgids) License: Apache License 2.0 Version: 0.8.8
+
+- a compact Textual terminal interface for people;
+- a complete non-TUI command-line interface for scripts and automation;
+- portable YAML-based setup profiles;
+- shared external model and workflow libraries;
+- update snapshots and rollback;
+- a YAML-backed runtime cache for fast startup and explicit rescans;
 
 `Python` · `comfyui` · `comfyui-api` · `comfyui-custom-nodes` · `comfyui-manager` · `comfyui-manager-2026` · `comfyui-nodes` · `comfyui-plugin`
 
@@ -73,22 +114,19 @@
 > Pi Agent integration and production assistant for ComfyUI
 
 [![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/badgids/ComfyUI-Pi-Agent)
-[![License](https://img.shields.io/github/license/badgids/ComfyUI-Pi-Agent?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/badgids/ComfyUI-Pi-Agent)
+[![License](https://img.shields.io/github/license/badgids/ComfyUI-Pi-Agent?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/badgids/ComfyUI-Pi-Agent/blob/main/LICENSE)
 [![Last commit](https://img.shields.io/github/last-commit/badgids/ComfyUI-Pi-Agent?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/badgids/ComfyUI-Pi-Agent/commits/main)
 
+A ComfyUI custom-node package that connects Pi Agent reasoning with practical workflow analysis, model discovery, project planning, screenplay tools, reference manifests, tutorial compilation, document export, and Kdenlive-first editorial handoff.
+
+- inspect and explain ComfyUI workflows;
+- validate and safely repair basic workflow structure;
+- discover installed model files without inventing filenames;
+- understand safetensors and GGUF as component formats;
+- build model-aware prompt packages;
+- create reference-asset manifests for characters, voices, audio, mood boards, and storyboards;
+
 `Python`
-
-<br>
-
-### [Badgids-pi-statusline](https://github.com/badgids/Badgids-pi-statusline)
-
-> A responsive, three-line custom status footer for the Pi coding agent. It replaces Pi's default footer with a compact dashboard showing the current project, Git state, selected model, token usage, provider, context usage, runtime state, and thinking level.
-
-[![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/badgids/Badgids-pi-statusline)
-[![License](https://img.shields.io/github/license/badgids/Badgids-pi-statusline?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/badgids/Badgids-pi-statusline)
-[![Last commit](https://img.shields.io/github/last-commit/badgids/Badgids-pi-statusline?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/badgids/Badgids-pi-statusline/commits/main)
-
-`TypeScript` · `pi` · `pi-agent` · `pi-agent-extension` · `statusbar` · `statusline`
 <!-- AUTO-CURRENTLY-WORKING-ON:END -->
 
 ## 🤝 Recently Contributed to
@@ -99,8 +137,17 @@
 > Embed AI assistants in Godot with the ability to read and write code in Godot's Code Editor.
 
 [![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/FlamxGames/godot-ai-assistant-hub)
-[![License](https://img.shields.io/github/license/FlamxGames/godot-ai-assistant-hub?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/FlamxGames/godot-ai-assistant-hub)
+[![License](https://img.shields.io/github/license/FlamxGames/godot-ai-assistant-hub?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/FlamxGames/godot-ai-assistant-hub/blob/main/LICENSE)
 [![Last commit](https://img.shields.io/github/last-commit/FlamxGames/godot-ai-assistant-hub?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/FlamxGames/godot-ai-assistant-hub/commits/main)
+
+Godot AI Assistant Hub ========================== Latest version: 2.1.0 (What's new?) (Upgrading to a newer version)
+
+- Godot context - When tools are enabled, the assistants can know what scene and script you are editing, so you can simply ask things like "What does this code do?".
+- Multiple assistants - Have multiple chat sessions with different types of assistants simultaneously.
+- Conversation editor - Edit the conversation history in case your assistant gets confused by some of your prompts, or you want to delete something that is using too much context.
+- IP configuration - Even for local LLMs, you can connect to a local computer and call remotely. This can be useful, for example, if you are a team but have only 1 powerful computer to run LLMs.
+- 6.1. Fill up the data requested in the window. Icon is optional.
+- 6.2. Click "Set tools access" if present. Hide whatever tools are not required. Using all tools can use too much context for some computers.
 
 `GDScript` · `ai` · `assistant` · `gemini` · `godot` · `jan` · `llm` · `ollama`
 
@@ -111,8 +158,17 @@
 > Neural latent upscaler for Minimax H3 (24ch). Bypasses costly 5B-param VAE decode/encode. Upscale low-res latents directly, then refine. Accelerates high-res video gen, outperforms naive interp.
 
 [![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler)
-[![License](https://img.shields.io/github/license/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler)
+[![License](https://img.shields.io/github/license/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler/blob/main/LICENSE)
 [![Last commit](https://img.shields.io/github/last-commit/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler/commits/main)
+
+Neural Latent Upscaler for Minimax H3 Video Generation Learned · High-fidelity · 2D & 3D Variants
+
+- ✅ Learned latent upscaling — neural network trained for Minimax H3 latents, far sharper
+- ✅ Two backbones — pick the fast 2D variant or the temporally-coherent 3D variant.
+- ✅ Three ways to set output size on the 3D node — scale by multiplier, target dimensions,
+- ✅ Tiled hires-fix upscaler (MMH3 Split Upscale combo) — re-sample the H3 AV latent at higher
+- ✅ 24-channel Minimax H3 latent — uses the exact per-channel mean/std normalization from
+- ✅ Auto architecture detection — reads inchannels, block counts, temporal config and
 
 `Python`
 <!-- AUTO-RECENT-CONTRIBUTIONS:END -->
@@ -166,30 +222,31 @@ The discipline and outdoor foundation I developed as an **Eagle Scout** still sh
 
 ## Selected work
 
-<!-- AUTO-SELECTED-WORK:START -->
+### GitHub
+
+<!-- AUTO-SELECTED-GITHUB:START -->
 | Project | What it explores |
 | --- | --- |
-| **[ComfyUI Setup Manager](https://github.com/badgids/comfyui-setup-manager)** | A standalone application for installing, launching, updating, repairing, inspecting, exporting, importing, and sharing ComfyUI installations, models, and workflows. |
-| **[Story Film Skills](https://github.com/badgids/Story-Film-Skills)** | Story-Film Skills is a local-first Agent Skills suite for story writing, book development, screenwriting, image/audio/video generation, directing, feature-film production, postproduction, and release delivery. It uses durable project files, stable IDs, deterministic validators, and recoverable workflows. |
-| **[ComfyUI Pi Agent](https://github.com/badgids/ComfyUI-Pi-Agent)** | Pi Agent integration and production assistant for ComfyUI |
-| **[ComfyUI Scene Camera Action](https://github.com/badgids/ComfyUI-scene-camera-action)** | A ComfyUI set of custom nodes to set up threejs interactive scenes to be used as video reference |
-| **[ComfyUI OrbitSheets](https://github.com/badgids/ComfyUI-OrbitSheets)** | Character turnaround and location reference sheets from a MiniMax-H3 camera move, with vision-model frame selection. |
-| **[ComfyUI H3 ExactAudioLock](https://github.com/badgids/ComfyUI-H3-ExactAudioLock)** | ComfyUI custom nodes for deterministic multi-speaker timed audio mixing and exact MiniMax H3 target-audio latent locking. |
-| **[ComfyUI MiniMax H3 Latent Upscaler](https://github.com/badgids/Comfyui_Minimax_h3_latent_Upscaler)** | Neural latent upscaler for Minimax H3 (24ch). Bypasses costly 5B-param VAE decode/encode. Upscale low-res latents directly, then refine. Accelerates high-res video gen, outperforms naive interp. |
-| **[ComfyUI ClipProj](https://github.com/badgids/ComfyUI-ClipProj)** | Swap a large text encoder for a small one with a learned linear projection. MiniMax H3 conditioning from 15.7 GB down to 5.2 GB. |
-| **[ACE-Step DAW](https://github.com/badgids/ACE-Step-DAW)** | WIP... |
-| **[ACE-Step Data Tool](https://github.com/badgids/Ace-Step_Data-Tool)** | Ace-Step Dataset Generator |
-| **[Audacity MCP](https://github.com/badgids/Audacity-MCP)** | AudacityMCP connects any MCP-compatible AI assistant to [Audacity](https://www.audacityteam.org/), giving it full control over audio editing through 131 tools and 9 pipelines spanning effects, cleanup, mastering, and more. Talk to your AI assistant and it edits your audio in real-time. |
-| **[ComfyScript](https://github.com/badgids/ComfyScript)** | A Python frontend and library for ComfyUI |
-| **[Godot AI](https://github.com/badgids/godot-ai)** | Production-grade MCP server and AI tools for the Godot engine. A Snap to install. Totally free and fun. |
+| **[comfyui-setup-manager](https://github.com/badgids/comfyui-setup-manager)** | A standalone application for installing, launching, updating, repairing, inspecting, exporting, importing, and sharing ComfyUI installations, models, and workflows. |
+| **[Story-Film-Skills](https://github.com/badgids/Story-Film-Skills)** | Story-Film Skills is a local-first Agent Skills suite for story writing, book development, screenwriting, image/audio/video generation, directing, feature-film production, postproduction, and release delivery. It uses durable project files, stable IDs, deterministic validators, and recoverable workflows. |
+| **[ComfyUI-Pi-Agent](https://github.com/badgids/ComfyUI-Pi-Agent)** | Pi Agent integration and production assistant for ComfyUI |
+| **[ComfyUI-scene-camera-action](https://github.com/badgids/ComfyUI-scene-camera-action)** | A ComfyUI set of custom nodes to set up threejs interactive scenes to be used as video reference |
+| **[ComfyUI-H3-ExactAudioLock](https://github.com/badgids/ComfyUI-H3-ExactAudioLock)** | ComfyUI custom nodes for deterministic multi-speaker timed audio mixing and exact MiniMax H3 target-audio latent locking. |
+| **[Badgids-pi-statusline](https://github.com/badgids/Badgids-pi-statusline)** | A responsive, three-line custom status footer for the Pi coding agent. It replaces Pi's default footer with a compact dashboard showing the current project, Git state, selected model, token usage, provider, context usage, runtime state, and thinking level. |
 | **[OpenKlyde](https://github.com/badgids/OpenKlyde)** | An AI Discord bot that connects to a koboldcpp instance by API calls. Have a more intelligent Clyde Bot of your own making! |
-| **[Transcription App](https://github.com/badgids/transcription-app)** | a transcription application that listens to audio input from the microphone using OpenAI's Whisper, transcribes it into text, and simulates typing the transcription in real-time wherever your cursor is on the screen. It can also do realtime translation. |
-| **[stitchmd](https://github.com/badgids/stitchmd)** | Stitch multiple Markdown files together into a single document. |
+| **[transcription-app](https://github.com/badgids/transcription-app)** | a transcription application that listens to audio input from the microphone using OpenAI's Whisper, transcribes it into text, and simulates typing the transcription in real-time wherever your cursor is on the screen. It can also do realtime translation. |
+<!-- AUTO-SELECTED-GITHUB:END -->
+
+### Hugging Face
+
+<!-- AUTO-SELECTED-HUGGINGFACE:START -->
+| Project | What it explores |
+| --- | --- |
 | **[Gonzo-Chat-7B](https://huggingface.co/Badgids/Gonzo-Chat-7B)** | A merged 7B conversational model for chat, roleplay, agents, and general local inference. |
 | **[Gonzo-Chat-7B-GGUF](https://huggingface.co/Badgids/Gonzo-Chat-7B-GGUF)** | GGUF quantizations of Gonzo-Chat-7B for efficient local inference with llama.cpp-compatible runtimes. |
 | **[Gonzo-Code-7B](https://huggingface.co/Badgids/Gonzo-Code-7B)** | A merged 7B model focused on coding and agent-oriented work. |
 | **[Gonzo-Code-7B-GGUF](https://huggingface.co/Badgids/Gonzo-Code-7B-GGUF)** | GGUF quantizations of Gonzo-Code-7B for locally runnable coding and agent workflows. |
-<!-- AUTO-SELECTED-WORK:END -->
+<!-- AUTO-SELECTED-HUGGINGFACE:END -->
 
 I am especially interested in collaborating on **machine learning, applied AI, local inference, automation, agent systems, and open-source tools**. Ask me about computer science, programming, ML/AI, ComfyUI, or turning an ambitious idea into a working system.
 
