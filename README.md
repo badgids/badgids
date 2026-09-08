@@ -142,12 +142,12 @@ A ComfyUI custom-node package that connects Pi Agent reasoning with practical wo
 
 Build a multi-scene MiniMax H3 video with one reusable sampling graph. Review each scene, compare takes, resume from checkpoints, and assemble the result later—without keeping the whole production in memory.
 
-- Choose semantic-anchor size and mode for cached, rebuilt, or connected
-- Checkpoint Manager explicitly names the output branch, available scenes,
-- Recover saved Max sizing through linked inputs and Tagged Scene Options.
-- Apply Match/Max upscale overrides to automatic caches too, rebuilding native
-- Preserve saved DeRoPE/upscale scenes when manifest updates or network
-- Recover interrupted PNG publication from a scene journal; accept recreated
+- Bring nightly's fractional video/audio denoise-mask correction to main,
+- Correct only missing streams; leave native fixes and source latents intact.
+- Conflicting VIDEO PNG exports automatically use 2, 3, etc. folders,
+- Copy verified earlier scenes safely when a rerender changes mid-sequence;
+- Capture a still from a saved Review Gate preview into the Project Asset
+- Resize the optional prompt editor using its new drag handle; height is
 
 `Python`
 
