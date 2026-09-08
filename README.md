@@ -132,6 +132,27 @@ A ComfyUI custom-node package that connects Pi Agent reasoning with practical wo
 ## 🤝 Recently Contributed to
 
 <!-- AUTO-RECENT-CONTRIBUTIONS:START -->
+### [ethanfel/ComfyUI-MiniMaxH3-Context-Loop](https://github.com/ethanfel/ComfyUI-MiniMaxH3-Context-Loop)
+
+> Clip chaining for MiniMax H3 in ComfyUI - motion and audio genuinely continue across joins
+
+[![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/ethanfel/ComfyUI-MiniMaxH3-Context-Loop)
+[![License](https://img.shields.io/github/license/ethanfel/ComfyUI-MiniMaxH3-Context-Loop?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/ethanfel/ComfyUI-MiniMaxH3-Context-Loop/blob/main/LICENSE)
+[![Last commit](https://img.shields.io/github/last-commit/ethanfel/ComfyUI-MiniMaxH3-Context-Loop?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/ethanfel/ComfyUI-MiniMaxH3-Context-Loop/commits/main)
+
+Build a multi-scene MiniMax H3 video with one reusable sampling graph. Review each scene, compare takes, resume from checkpoints, and assemble the result later—without keeping the whole production in memory.
+
+- Choose semantic-anchor size and mode for cached, rebuilt, or connected
+- Checkpoint Manager explicitly names the output branch, available scenes,
+- Recover saved Max sizing through linked inputs and Tagged Scene Options.
+- Apply Match/Max upscale overrides to automatic caches too, rebuilding native
+- Preserve saved DeRoPE/upscale scenes when manifest updates or network
+- Recover interrupted PNG publication from a scene journal; accept recreated
+
+`Python`
+
+<br>
+
 ### [FlamxGames/godot-ai-assistant-hub](https://github.com/FlamxGames/godot-ai-assistant-hub)
 
 > Embed AI assistants in Godot with the ability to read and write code in Godot's Code Editor.
