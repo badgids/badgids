@@ -1,27 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="509" viewBox="0 0 900 509" role="img" aria-labelledby="title description">
 <title id="title">Languages Used</title>
-<desc id="description">Language usage across 424 repositories and 138 languages.</desc>
+<desc id="description">Language usage across 425 repositories and 138 languages.</desc>
 <rect x="0.5" y="0.5" width="899" height="508" rx="10" fill="#0D1117" stroke="#30363D"/>
 <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}.heading{font-size:23px;font-weight:700;fill:#F0F6FC}.subheading{font-size:13px;fill:#8B949E}.legend-name{font-size:14px;font-weight:600;fill:#C9D1D9}.legend-value{font-size:13px;fill:#8B949E}.center-total{font-size:21px;font-weight:700;fill:#F0F6FC}.center-label{font-size:12px;fill:#8B949E}</style>
 <text class="heading" x="34" y="43">Languages Used</text>
-<text class="subheading" x="34" y="68">424 repositories · 138 languages</text>
-<path d="M 225.805 130.502 A 142 142 0 0 1 350.430 339.069 L 294.781 309.535 A 79 79 0 0 0 225.448 193.501 Z" fill="#F34B7D" stroke="#0D1117" stroke-width="1"><title>C++: 32.86% (770 MB)</title></path>
-<path d="M 349.666 340.487 A 142 142 0 0 1 199.039 412.107 L 210.557 350.168 A 79 79 0 0 0 294.357 310.324 Z" fill="#555555" stroke="#0D1117" stroke-width="1"><title>C: 20.16% (472 MB)</title></path>
-<path d="M 197.457 411.803 A 142 142 0 0 1 108.116 353.136 L 159.973 317.361 A 79 79 0 0 0 209.677 350.000 Z" fill="#3178C6" stroke="#0D1117" stroke-width="1"><title>TypeScript: 12.46% (292 MB)</title></path>
-<path d="M 107.209 351.805 A 142 142 0 0 1 84.530 251.711 L 146.851 260.934 A 79 79 0 0 0 159.468 316.620 Z" fill="#3572A5" stroke="#0D1117" stroke-width="1"><title>Python: 11.95% (280 MB)</title></path>
-<path d="M 84.775 250.118 A 142 142 0 0 1 96.378 212.331 L 153.442 239.026 A 79 79 0 0 0 146.987 260.048 Z" fill="#DA5B0B" stroke="#0D1117" stroke-width="1"><title>Jupyter Notebook: 4.63% (108 MB)</title></path>
-<path d="M 97.068 210.876 A 142 142 0 0 1 114.690 183.082 L 163.630 222.753 A 79 79 0 0 0 153.827 238.216 Z" fill="#F1E05A" stroke="#0D1117" stroke-width="1"><title>JavaScript: 3.88% (91 MB)</title></path>
-<path d="M 115.598 181.973 A 142 142 0 0 1 125.355 171.332 L 169.564 216.217 A 79 79 0 0 0 164.135 222.136 Z" fill="#DEA584" stroke="#0D1117" stroke-width="1"><title>Rust: 1.76% (41 MB)</title></path>
-<path d="M 126.131 170.574 A 142 142 0 0 1 133.941 163.540 L 174.340 211.881 A 79 79 0 0 0 169.995 215.795 Z" fill="#00ADD8" stroke="#0D1117" stroke-width="1"><title>Go: 1.28% (30 MB)</title></path>
-<path d="M 134.563 163.023 A 142 142 0 0 1 140.951 158.046 L 178.240 208.825 A 79 79 0 0 0 174.687 211.594 Z" fill="#E34C26" stroke="#0D1117" stroke-width="1"><title>HTML: 0.99% (23 MB)</title></path>
-<path d="M 141.485 157.656 A 142 142 0 0 1 147.332 153.623 L 181.790 206.364 A 79 79 0 0 0 178.537 208.608 Z" fill="#B07219" stroke="#0D1117" stroke-width="1"><title>Java: 0.87% (20 MB)</title></path>
-<path d="M 147.828 153.301 A 142 142 0 0 1 153.376 149.887 L 185.153 204.286 A 79 79 0 0 0 182.066 206.185 Z" fill="#51D668" stroke="#0D1117" stroke-width="1"><title>LilyPond: 0.79% (19 MB)</title></path>
-<path d="M 154.318 149.341 A 142 142 0 0 1 224.195 130.502 L 224.552 193.501 A 79 79 0 0 0 185.677 203.982 Z" fill="#8B949E" stroke="#0D1117" stroke-width="1"><title>Other (127 languages): 8.38% (196 MB)</title></path>
+<text class="subheading" x="34" y="68">425 repositories · 138 languages</text>
+<path d="M 225.805 130.502 A 142 142 0 0 1 350.456 339.019 L 294.796 309.507 A 79 79 0 0 0 225.448 193.501 Z" fill="#F34B7D" stroke="#0D1117" stroke-width="1"><title>C++: 32.85% (770 MB)</title></path>
+<path d="M 349.693 340.438 A 142 142 0 0 1 199.127 412.123 L 210.606 350.178 A 79 79 0 0 0 294.372 310.297 Z" fill="#555555" stroke="#0D1117" stroke-width="1"><title>C: 20.16% (472 MB)</title></path>
+<path d="M 197.545 411.821 A 142 142 0 0 1 108.179 353.227 L 160.008 317.412 A 79 79 0 0 0 209.726 350.009 Z" fill="#3178C6" stroke="#0D1117" stroke-width="1"><title>TypeScript: 12.46% (292 MB)</title></path>
+<path d="M 107.271 351.897 A 142 142 0 0 1 84.523 251.760 L 146.847 260.961 A 79 79 0 0 0 159.503 316.672 Z" fill="#3572A5" stroke="#0D1117" stroke-width="1"><title>Python: 11.96% (280 MB)</title></path>
+<path d="M 84.767 250.167 A 142 142 0 0 1 96.353 212.383 L 153.429 239.055 A 79 79 0 0 0 146.983 260.075 Z" fill="#DA5B0B" stroke="#0D1117" stroke-width="1"><title>Jupyter Notebook: 4.62% (108 MB)</title></path>
+<path d="M 97.044 210.928 A 142 142 0 0 1 114.705 183.063 L 163.638 222.743 A 79 79 0 0 0 153.813 238.245 Z" fill="#F1E05A" stroke="#0D1117" stroke-width="1"><title>JavaScript: 3.89% (91 MB)</title></path>
+<path d="M 115.613 181.955 A 142 142 0 0 1 125.370 171.318 L 169.572 216.208 A 79 79 0 0 0 164.144 222.126 Z" fill="#DEA584" stroke="#0D1117" stroke-width="1"><title>Rust: 1.76% (41 MB)</title></path>
+<path d="M 126.146 170.559 A 142 142 0 0 1 133.956 163.528 L 174.348 211.875 A 79 79 0 0 0 170.004 215.787 Z" fill="#00ADD8" stroke="#0D1117" stroke-width="1"><title>Go: 1.28% (30 MB)</title></path>
+<path d="M 134.578 163.011 A 142 142 0 0 1 140.965 158.036 L 178.248 208.819 A 79 79 0 0 0 174.695 211.587 Z" fill="#E34C26" stroke="#0D1117" stroke-width="1"><title>HTML: 0.99% (23 MB)</title></path>
+<path d="M 141.498 157.646 A 142 142 0 0 1 147.345 153.615 L 181.797 206.360 A 79 79 0 0 0 178.545 208.602 Z" fill="#B07219" stroke="#0D1117" stroke-width="1"><title>Java: 0.87% (20 MB)</title></path>
+<path d="M 147.841 153.292 A 142 142 0 0 1 153.389 149.879 L 185.160 204.282 A 79 79 0 0 0 182.074 206.180 Z" fill="#51D668" stroke="#0D1117" stroke-width="1"><title>LilyPond: 0.79% (19 MB)</title></path>
+<path d="M 154.331 149.334 A 142 142 0 0 1 224.195 130.502 L 224.552 193.501 A 79 79 0 0 0 185.684 203.978 Z" fill="#8B949E" stroke="#0D1117" stroke-width="1"><title>Other (127 languages): 8.38% (196 MB)</title></path>
 <text class="center-total" x="225" y="267.5" text-anchor="middle">2.3 GB</text>
 <text class="center-label" x="225" y="290.5" text-anchor="middle">GitHub Linguist bytes</text>
 <rect x="425" y="115" width="14" height="14" rx="3" fill="#F34B7D"/>
 <text class="legend-name" x="448" y="127">C++</text>
-<text class="legend-value" x="858" y="127" text-anchor="end">32.86% · 770 MB</text>
+<text class="legend-value" x="858" y="127" text-anchor="end">32.85% · 770 MB</text>
 <rect x="425" y="142" width="14" height="14" rx="3" fill="#555555"/>
 <text class="legend-name" x="448" y="154">C</text>
 <text class="legend-value" x="858" y="154" text-anchor="end">20.16% · 472 MB</text>
@@ -30,13 +30,13 @@
 <text class="legend-value" x="858" y="181" text-anchor="end">12.46% · 292 MB</text>
 <rect x="425" y="196" width="14" height="14" rx="3" fill="#3572A5"/>
 <text class="legend-name" x="448" y="208">Python</text>
-<text class="legend-value" x="858" y="208" text-anchor="end">11.95% · 280 MB</text>
+<text class="legend-value" x="858" y="208" text-anchor="end">11.96% · 280 MB</text>
 <rect x="425" y="223" width="14" height="14" rx="3" fill="#DA5B0B"/>
 <text class="legend-name" x="448" y="235">Jupyter Notebook</text>
-<text class="legend-value" x="858" y="235" text-anchor="end">4.63% · 108 MB</text>
+<text class="legend-value" x="858" y="235" text-anchor="end">4.62% · 108 MB</text>
 <rect x="425" y="250" width="14" height="14" rx="3" fill="#F1E05A"/>
 <text class="legend-name" x="448" y="262">JavaScript</text>
-<text class="legend-value" x="858" y="262" text-anchor="end">3.88% · 91 MB</text>
+<text class="legend-value" x="858" y="262" text-anchor="end">3.89% · 91 MB</text>
 <rect x="425" y="277" width="14" height="14" rx="3" fill="#DEA584"/>
 <text class="legend-name" x="448" y="289">Rust</text>
 <text class="legend-value" x="858" y="289" text-anchor="end">1.76% · 41 MB</text>

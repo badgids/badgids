@@ -32,6 +32,27 @@
 ## 🚀 Currently Working On
 
 <!-- AUTO-CURRENTLY-WORKING-ON:START -->
+### [pi-pr-repair-loop](https://github.com/badgids/pi-pr-repair-loop)
+
+> Active repository with recent development work.
+
+[![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/badgids/pi-pr-repair-loop)
+[![License](https://img.shields.io/github/license/badgids/pi-pr-repair-loop?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/badgids/pi-pr-repair-loop/blob/main/LICENSE)
+[![Last commit](https://img.shields.io/github/last-commit/badgids/pi-pr-repair-loop?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/badgids/pi-pr-repair-loop/commits/main)
+
+Maintainer-review-driven TDD repair loop for the Pi coding agent.
+
+- Exact per-finding HEAD contracts. A finding starts from the ledger's exact current HEAD and completion verifies ancestry, cleanliness, changed-file scope, and commit count.
+- Configurable test profiles. Define focused, regression, smoke, and final command groups. prrepairtests executes them and records evidence.
+- Fresh-context independent review. A separate read-only pi -p process, with no extensions, skills, prompt templates, context files, or write tools, tries to disprove each repair against the original maintainer reproduction.
+- CI ingestion. Reads GitHub combined commit status and check-runs for the repair HEAD.
+- Maintainer filtering. By default only OWNER, MEMBER, and COLLABORATOR review material is ingested; explicit include/exclude lists are configurable.
+- Review-head comparison. Tracks the PR head, inferred reviewed head, and local HEAD so a repair does not silently start against the wrong revision.
+
+`JavaScript`
+
+<br>
+
 ### [ComfyUI-H3-ExactAudioLock](https://github.com/badgids/ComfyUI-H3-ExactAudioLock)
 
 > ComfyUI custom nodes for deterministic multi-speaker timed audio mixing and exact MiniMax H3 target-audio latent locking.
@@ -106,27 +127,6 @@ Author and creator: Alan Guice (Badgids) License: Apache License 2.0 Version: 0.
 - a YAML-backed runtime cache for fast startup and explicit rescans;
 
 `Python` · `comfyui` · `comfyui-api` · `comfyui-custom-nodes` · `comfyui-manager` · `comfyui-manager-2026` · `comfyui-nodes` · `comfyui-plugin`
-
-<br>
-
-### [ComfyUI-Pi-Agent](https://github.com/badgids/ComfyUI-Pi-Agent)
-
-> Pi Agent integration and production assistant for ComfyUI
-
-[![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/badgids/ComfyUI-Pi-Agent)
-[![License](https://img.shields.io/github/license/badgids/ComfyUI-Pi-Agent?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/badgids/ComfyUI-Pi-Agent/blob/main/LICENSE)
-[![Last commit](https://img.shields.io/github/last-commit/badgids/ComfyUI-Pi-Agent?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/badgids/ComfyUI-Pi-Agent/commits/main)
-
-A ComfyUI custom-node package that connects Pi Agent reasoning with practical workflow analysis, model discovery, project planning, screenplay tools, reference manifests, tutorial compilation, document export, and Kdenlive-first editorial handoff.
-
-- inspect and explain ComfyUI workflows;
-- validate and safely repair basic workflow structure;
-- discover installed model files without inventing filenames;
-- understand safetensors and GGUF as component formats;
-- build model-aware prompt packages;
-- create reference-asset manifests for characters, voices, audio, mood boards, and storyboards;
-
-`Python`
 <!-- AUTO-CURRENTLY-WORKING-ON:END -->
 
 ## 🤝 Recently Contributed to
