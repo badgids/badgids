@@ -142,12 +142,12 @@ Author and creator: Alan Guice (Badgids) License: Apache License 2.0 Version: 0.
 
 Build a multi-scene MiniMax H3 video with one reusable sampling graph. Review each scene, compare takes, resume from checkpoints, and assemble the result later—without keeping the whole production in memory.
 
+- Combine repeated Plan refreshes during workflow loading.
+- Fix default steps and fingerprint input visibility; keep deliberate scene
+- Add a separate-loader source-audio example without the Carousel.
 - Bring nightly's fractional video/audio denoise-mask correction to main,
 - Correct only missing streams; leave native fixes and source latents intact.
 - Conflicting VIDEO PNG exports automatically use 2, 3, etc. folders,
-- Copy verified earlier scenes safely when a rerender changes mid-sequence;
-- Capture a still from a saved Review Gate preview into the Project Asset
-- Resize the optional prompt editor using its new drag handle; height is
 
 `Python`
 
