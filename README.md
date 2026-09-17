@@ -32,6 +32,27 @@
 ## 🚀 Currently Working On
 
 <!-- AUTO-CURRENTLY-WORKING-ON:START -->
+### [ComfyUI-H3-ExactAudioLock](https://github.com/badgids/ComfyUI-H3-ExactAudioLock)
+
+> ComfyUI custom nodes for deterministic multi-speaker timed audio mixing and exact MiniMax H3 target-audio latent locking.
+
+[![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/badgids/ComfyUI-H3-ExactAudioLock)
+[![License](https://img.shields.io/github/license/badgids/ComfyUI-H3-ExactAudioLock?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/badgids/ComfyUI-H3-ExactAudioLock/blob/main/LICENSE)
+[![Last commit](https://img.shields.io/github/last-commit/badgids/ComfyUI-H3-ExactAudioLock?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/badgids/ComfyUI-H3-ExactAudioLock/commits/main)
+
+Author/Developer: Alan Guice (Badgids) Copyright: © 2026 Alan Guice (Badgids) License: MIT License
+
+- Locks an exact user-controlled waveform into MiniMax H3's target audio latent.
+- Keeps H3 video denoisable while the complete target audio stream remains fixed.
+- Supports dialogue-only partial locking so H3 can still generate ambience, Foley, music, effects, and other unsupplied audio.
+- Provides scene-aware variants for recursive H3 Director / Context Loop workflows.
+- Provides an embedded Audio Review / Accept Gate for choosing one candidate and optionally saving alternate takes.
+- Accepts normal ComfyUI AUDIO from TTS, voice-cloning, music, audio-loader, or processing nodes.
+
+`Python`
+
+<br>
+
 ### [pi-pr-repair-loop](https://github.com/badgids/pi-pr-repair-loop)
 
 > Active repository with recent development work.
@@ -50,27 +71,6 @@ Maintainer-review-driven TDD repair loop for the Pi coding agent.
 - Review-head comparison. Tracks the PR head, inferred reviewed head, and local HEAD so a repair does not silently start against the wrong revision.
 
 `JavaScript`
-
-<br>
-
-### [ComfyUI-H3-ExactAudioLock](https://github.com/badgids/ComfyUI-H3-ExactAudioLock)
-
-> ComfyUI custom nodes for deterministic multi-speaker timed audio mixing and exact MiniMax H3 target-audio latent locking.
-
-[![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/badgids/ComfyUI-H3-ExactAudioLock)
-[![License](https://img.shields.io/github/license/badgids/ComfyUI-H3-ExactAudioLock?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/badgids/ComfyUI-H3-ExactAudioLock/blob/main/LICENSE)
-[![Last commit](https://img.shields.io/github/last-commit/badgids/ComfyUI-H3-ExactAudioLock?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/badgids/ComfyUI-H3-ExactAudioLock/commits/main)
-
-Author/Developer: Alan Guice (Badgids) Copyright: © 2026 Alan Guice (Badgids). License: MIT License
-
-- Locks an exact user-controlled waveform into MiniMax H3's target audio latent.
-- Keeps H3 video denoisable while the target audio stream remains fixed.
-- Accepts an effectively unlimited number of timed audio events through ComfyUI's native Autogrow inputs.
-- Places every source on H3's 24 fps target-video timeline using deterministic integer frame-to-sample conversion.
-- Mixes multiple speakers or sound sources sample-accurately into one H3 target waveform.
-- Supports overlapping dialogue and layered audio.
-
-`Python`
 
 <br>
 
