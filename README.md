@@ -142,12 +142,12 @@ Author and creator: Alan Guice (Badgids) License: Apache License 2.0 Version: 0.
 
 Build a multi-scene MiniMax H3 video with one reusable sampling graph. Review each scene, compare takes, resume from checkpoints, and assemble the result later—without keeping the whole production in memory.
 
+- Remove duplicate saved-artifact hashing during resume while preserving
+- Fix Modern/Production Plan blank space and duplicate controls, including
+- Add persistent global prompt collapse, fix canvas wheel navigation over
 - Recover expanded visual context when resuming saved scenes (#72).
 - Improve deferred Carousel reference recovery and add a saved upscale loader
 - Add persistent scene collapse controls to the base Plan editors (#69).
-- Improve checkpoint reattribution and add previewed obsolete-path cleanup,
-- Correct zoomed trim dragging and refresh trim controls as checkpoints load.
-- Combine repeated Plan refreshes during workflow loading.
 
 `Python`
 
