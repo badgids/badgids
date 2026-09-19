@@ -32,6 +32,27 @@
 ## 🚀 Currently Working On
 
 <!-- AUTO-CURRENTLY-WORKING-ON:START -->
+### [pi-skill-orchestrator](https://github.com/badgids/pi-skill-orchestrator)
+
+> Pi Skill Orchestrator is a Pi extension for people who use a lot of Agent Skills. It keeps Pi's normal skill autocomplete, but it stops the complete skill catalog from taking space in the LLM system prompt on every turn.
+
+[![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/badgids/pi-skill-orchestrator)
+[![License](https://img.shields.io/github/license/badgids/pi-skill-orchestrator?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/badgids/pi-skill-orchestrator/blob/main/LICENSE)
+[![Last commit](https://img.shields.io/github/last-commit/badgids/pi-skill-orchestrator?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/badgids/pi-skill-orchestrator/commits/main)
+
+Author/Developer: Alan Guice (Badgids) Copyright: © 2026 Alan Guice (Badgids). License: MIT License Version: 0.1.26
+
+- Keeps the complete installed skill catalog out of the LLM system prompt while the extension is active.
+- Preserves Pi's normal /skill: autocomplete.
+- Searches skill metadata only when the model needs a capability.
+- Returns a small bounded set of matching skill names and descriptions.
+- Loads one selected root skill at a time.
+- Resolves recursive skill dependencies only when needed.
+
+`TypeScript` · `agent-orchestration` · `agent-skill` · `agent-skills` · `agents` · `ai` · `ai-agent` · `ai-agents`
+
+<br>
+
 ### [ComfyUI-H3-ExactAudioLock](https://github.com/badgids/ComfyUI-H3-ExactAudioLock)
 
 > ComfyUI custom nodes for deterministic multi-speaker timed audio mixing and exact MiniMax H3 target-audio latent locking.
@@ -106,27 +127,6 @@ An interactive 3D scene staging, actor acting, and camera directing suite of cus
 - Animated 3D Humanoid Model: Custom 3D human model with bone structure and armature animations.
 
 `JavaScript`
-
-<br>
-
-### [comfyui-setup-manager](https://github.com/badgids/comfyui-setup-manager)
-
-> A standalone application for installing, launching, updating, repairing, inspecting, exporting, importing, and sharing ComfyUI installations, models, and workflows.
-
-[![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/badgids/comfyui-setup-manager)
-[![License](https://img.shields.io/github/license/badgids/comfyui-setup-manager?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/badgids/comfyui-setup-manager/blob/main/LICENSE)
-[![Last commit](https://img.shields.io/github/last-commit/badgids/comfyui-setup-manager?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/badgids/comfyui-setup-manager/commits/main)
-
-Author and creator: Alan Guice (Badgids) License: Apache License 2.0 Version: 0.8.8
-
-- a compact Textual terminal interface for people;
-- a complete non-TUI command-line interface for scripts and automation;
-- portable YAML-based setup profiles;
-- shared external model and workflow libraries;
-- update snapshots and rollback;
-- a YAML-backed runtime cache for fast startup and explicit rescans;
-
-`Python` · `comfyui` · `comfyui-api` · `comfyui-custom-nodes` · `comfyui-manager` · `comfyui-manager-2026` · `comfyui-nodes` · `comfyui-plugin`
 <!-- AUTO-CURRENTLY-WORKING-ON:END -->
 
 ## 🤝 Recently Contributed to
