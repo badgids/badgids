@@ -140,7 +140,7 @@ An interactive 3D scene staging, actor acting, and camera directing suite of cus
 [![License](https://img.shields.io/github/license/ethanfel/ComfyUI-MiniMaxH3-Context-Loop?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/ethanfel/ComfyUI-MiniMaxH3-Context-Loop/blob/main/LICENSE)
 [![Last commit](https://img.shields.io/github/last-commit/ethanfel/ComfyUI-MiniMaxH3-Context-Loop?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/ethanfel/ComfyUI-MiniMaxH3-Context-Loop/commits/main)
 
-Build a multi-scene MiniMax H3 video with one reusable sampling graph. Review each scene, compare takes, resume from checkpoints, and assemble the result later—without keeping the whole production in memory.
+See 0.7 migration notes for retired legacy nodes.
 
 - Remove duplicate saved-artifact hashing during resume while preserving
 - Fix Modern/Production Plan blank space and duplicate controls, including
