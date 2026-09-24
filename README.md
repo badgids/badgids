@@ -140,14 +140,14 @@ An interactive 3D scene staging, actor acting, and camera directing suite of cus
 [![License](https://img.shields.io/github/license/ethanfel/ComfyUI-MiniMaxH3-Context-Loop?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/ethanfel/ComfyUI-MiniMaxH3-Context-Loop/blob/main/LICENSE)
 [![Last commit](https://img.shields.io/github/last-commit/ethanfel/ComfyUI-MiniMaxH3-Context-Loop?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/ethanfel/ComfyUI-MiniMaxH3-Context-Loop/commits/main)
 
-See 0.7 migration notes for retired legacy nodes.
+Build a multi-scene MiniMax H3 video with one reusable sampling graph. Every scene can be reviewed, retried, checkpointed, resumed, and assembled later.
 
-- Remove duplicate saved-artifact hashing during resume while preserving
-- Fix Modern/Production Plan blank space and duplicate controls, including
-- Add persistent global prompt collapse, fix canvas wheel navigation over
-- Recover expanded visual context when resuming saved scenes (#72).
-- Improve deferred Carousel reference recovery and add a saved upscale loader
-- Add persistent scene collapse controls to the base Plan editors (#69).
+- Groups full mix, vocals and instrumental tracks: vocals drive lip-sync while
+- Runs one scene at a time through the same H3 sampler body.
+- Carries visual motion, generated sound, or protected source audio between
+- Saves each accepted take to disk, so a stopped or failed run can resume.
+- Provides scene review, alternate takes, branch management, final assembly,
+- Captures a frame from a saved Review Gate preview into the Project Asset
 
 `Python`
 
