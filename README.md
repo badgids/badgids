@@ -32,27 +32,6 @@
 ## 🚀 Currently Working On
 
 <!-- AUTO-CURRENTLY-WORKING-ON:START -->
-### [pi-skill-orchestrator](https://github.com/badgids/pi-skill-orchestrator)
-
-> Pi Skill Orchestrator is a Pi extension for people who use a lot of Agent Skills. It keeps Pi's normal skill autocomplete, but it stops the complete skill catalog from taking space in the LLM system prompt on every turn.
-
-[![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/badgids/pi-skill-orchestrator)
-[![License](https://img.shields.io/github/license/badgids/pi-skill-orchestrator?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/badgids/pi-skill-orchestrator/blob/main/LICENSE)
-[![Last commit](https://img.shields.io/github/last-commit/badgids/pi-skill-orchestrator?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/badgids/pi-skill-orchestrator/commits/main)
-
-Author/Developer: Alan Guice (Badgids) Copyright: © 2026 Alan Guice (Badgids). License: MIT License Version: 0.1.26
-
-- Keeps the complete installed skill catalog out of the LLM system prompt while the extension is active.
-- Preserves Pi's normal /skill: autocomplete.
-- Searches skill metadata only when the model needs a capability.
-- Returns a small bounded set of matching skill names and descriptions.
-- Loads one selected root skill at a time.
-- Resolves recursive skill dependencies only when needed.
-
-`TypeScript` · `agent-orchestration` · `agent-skill` · `agent-skills` · `agents` · `ai` · `ai-agent` · `ai-agents`
-
-<br>
-
 ### [ComfyUI-H3-ExactAudioLock](https://github.com/badgids/ComfyUI-H3-ExactAudioLock)
 
 > ComfyUI custom nodes for deterministic multi-speaker timed audio mixing and exact MiniMax H3 target-audio latent locking.
@@ -71,6 +50,27 @@ Author/Developer: Alan Guice (Badgids) Copyright: © 2026 Alan Guice (Badgids) L
 - Accepts normal ComfyUI AUDIO from TTS, voice-cloning, music, audio-loader, or processing nodes.
 
 `Python`
+
+<br>
+
+### [pi-skill-orchestrator](https://github.com/badgids/pi-skill-orchestrator)
+
+> Pi Skill Orchestrator is a Pi extension for people who use a lot of Agent Skills. It keeps Pi's normal skill autocomplete, but it stops the complete skill catalog from taking space in the LLM system prompt on every turn.
+
+[![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/badgids/pi-skill-orchestrator)
+[![License](https://img.shields.io/github/license/badgids/pi-skill-orchestrator?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/badgids/pi-skill-orchestrator/blob/main/LICENSE)
+[![Last commit](https://img.shields.io/github/last-commit/badgids/pi-skill-orchestrator?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/badgids/pi-skill-orchestrator/commits/main)
+
+Author/Developer: Alan Guice (Badgids) Copyright: © 2026 Alan Guice (Badgids). License: MIT License Version: 0.1.26
+
+- Keeps the complete installed skill catalog out of the LLM system prompt while the extension is active.
+- Preserves Pi's normal /skill: autocomplete.
+- Searches skill metadata only when the model needs a capability.
+- Returns a small bounded set of matching skill names and descriptions.
+- Loads one selected root skill at a time.
+- Resolves recursive skill dependencies only when needed.
+
+`TypeScript` · `agent-orchestration` · `agent-skill` · `agent-skills` · `agents` · `ai` · `ai-agent` · `ai-agents`
 
 <br>
 
