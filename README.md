@@ -32,6 +32,27 @@
 ## 🚀 Currently Working On
 
 <!-- AUTO-CURRENTLY-WORKING-ON:START -->
+### [comfyui-development-skills](https://github.com/badgids/comfyui-development-skills)
+
+> ComfyUI Development Skills is a portable Agent Skills pack for people who develop ComfyUI itself, custom nodes, frontend extensions, workflows, integrations, tests, and related tooling.
+
+[![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/badgids/comfyui-development-skills)
+[![License](https://img.shields.io/github/license/badgids/comfyui-development-skills?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/badgids/comfyui-development-skills/blob/main/LICENSE)
+[![Last commit](https://img.shields.io/github/last-commit/badgids/comfyui-development-skills?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/badgids/comfyui-development-skills/commits/main)
+
+Author/Developer: Alan Guice (Badgids) Copyright: © 2026 Alan Guice (Badgids). License: MIT License Display version: v0.1.11 Canonical version: 00.01.11
+
+- ComfyUI core and backend development;
+- Python custom nodes;
+- JavaScript and TypeScript frontend extensions;
+- frontend/editor workflow JSON;
+- API-format workflows;
+- live workflow compatibility checks;
+
+`Python` · `agent` · `agent-skill` · `agent-skills` · `claude-code` · `codex` · `comfy-ui` · `comfyui`
+
+<br>
+
 ### [ComfyUI-H3-ExactAudioLock](https://github.com/badgids/ComfyUI-H3-ExactAudioLock)
 
 > ComfyUI custom nodes for deterministic multi-speaker timed audio mixing and exact MiniMax H3 target-audio latent locking.
@@ -106,27 +127,6 @@ Maintainer-review-driven TDD repair loop for the Pi coding agent.
 Author/Developer: Alan Guice (Badgids) License: Apache License 2.0 Copyright © 2026 Alan Guice (Badgids).
 
 `Python` · `ai` · `ai-agent` · `ai-coding` · `ai-tools` · `comfyui` · `film` · `film-editing`
-
-<br>
-
-### [ComfyUI-scene-camera-action](https://github.com/badgids/ComfyUI-scene-camera-action)
-
-> A ComfyUI set of custom nodes to set up threejs interactive scenes to be used as video reference
-
-[![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/badgids/ComfyUI-scene-camera-action)
-[![License](https://img.shields.io/github/license/badgids/ComfyUI-scene-camera-action?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/badgids/ComfyUI-scene-camera-action/blob/dev/docs/LICENSE)
-[![Last commit](https://img.shields.io/github/last-commit/badgids/ComfyUI-scene-camera-action?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/badgids/ComfyUI-scene-camera-action/commits/dev/docs)
-
-An interactive 3D scene staging, actor acting, and camera directing suite of custom nodes for ComfyUI.
-
-- Multi-Actor Chaining: Sequence and record multiple independent actors (humanoids and vehicles) on the same stage with synchronized playback.
-- Camera Spring Arm (Anti-Collision): Real-time obstacle avoidance prevents camera clipping against walls and geometry during dynamic camera moves.
-- Actor Color Customization: Dynamic mesh coloring to visually distinguish different actors across the 3D viewport and node timeline.
-- Universal Stage Builder: Universal 3D geometric engine with 5 core primitives and new presets (courthousesquare, gasstation).
-- Vue.js Architecture: Modernized modular reactive UI components (StagingWidget, ActingWidget, DirectingWidget).
-- Animated 3D Humanoid Model: Custom 3D human model with bone structure and armature animations.
-
-`JavaScript`
 <!-- AUTO-CURRENTLY-WORKING-ON:END -->
 
 ## 🤝 Recently Contributed to
