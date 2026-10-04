@@ -150,6 +150,48 @@ Build a multi-scene MiniMax H3 video with one reusable sampling graph. Every sce
 - Captures a frame from a saved Review Gate preview into the Project Asset
 
 `Python`
+
+<br>
+
+### [FlamxGames/godot-ai-assistant-hub](https://github.com/FlamxGames/godot-ai-assistant-hub)
+
+> Embed AI assistants in Godot with the ability to read and write code in Godot's Code Editor.
+
+[![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/FlamxGames/godot-ai-assistant-hub)
+[![License](https://img.shields.io/github/license/FlamxGames/godot-ai-assistant-hub?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/FlamxGames/godot-ai-assistant-hub/blob/main/LICENSE)
+[![Last commit](https://img.shields.io/github/last-commit/FlamxGames/godot-ai-assistant-hub?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/FlamxGames/godot-ai-assistant-hub/commits/main)
+
+Godot AI Assistant Hub ========================== Latest version: 2.1.0 (What's new?) (Upgrading to a newer version)
+
+- Godot context - When tools are enabled, the assistants can know what scene and script you are editing, so you can simply ask things like "What does this code do?".
+- Multiple assistants - Have multiple chat sessions with different types of assistants simultaneously.
+- Conversation editor - Edit the conversation history in case your assistant gets confused by some of your prompts, or you want to delete something that is using too much context.
+- IP configuration - Even for local LLMs, you can connect to a local computer and call remotely. This can be useful, for example, if you are a team but have only 1 powerful computer to run LLMs.
+- 6.1. Fill up the data requested in the window. Icon is optional.
+- 6.2. Click "Set tools access" if present. Hide whatever tools are not required. Using all tools can use too much context for some computers.
+
+`GDScript` · `ai` · `assistant` · `gemini` · `godot` · `jan` · `llm` · `ollama`
+
+<br>
+
+### [LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler](https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler)
+
+> Neural latent upscaler for Minimax H3 (24ch). Bypasses costly 5B-param VAE decode/encode. Upscale low-res latents directly, then refine. Accelerates high-res video gen, outperforms naive interp.
+
+[![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler)
+[![License](https://img.shields.io/github/license/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler/blob/main/LICENSE)
+[![Last commit](https://img.shields.io/github/last-commit/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/LBH-123-AI/Comfyui_Minimax_h3_latent_Upscaler/commits/main)
+
+Neural Latent Upscaler for Minimax H3 Video Generation Learned · High-fidelity · 2D & 3D Variants
+
+- ✅ Learned latent upscaling — neural network trained for Minimax H3 latents, far sharper
+- ✅ Two backbones — pick the fast 2D variant or the temporally-coherent 3D variant.
+- ✅ Three ways to set output size on the 3D node — scale by multiplier, target dimensions,
+- ✅ Tiled hires-fix upscaler (MMH3 Split Upscale combo) — re-sample the H3 AV latent at higher
+- ✅ 24-channel Minimax H3 latent — uses the exact per-channel mean/std normalization from
+- ✅ Auto architecture detection — reads inchannels, block counts, temporal config and
+
+`Python`
 <!-- AUTO-RECENT-CONTRIBUTIONS:END -->
 
 ---

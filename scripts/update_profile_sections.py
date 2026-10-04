@@ -3,7 +3,9 @@
 
 Behavior:
 - Currently Working On: latest 5 qualifying GitHub projects actually worked on by badgids.
-- Recently Contributed to: latest 10 unique external GitHub projects from public contribution events.
+- Recently Contributed to: up to 10 unique external GitHub projects. New projects are
+  discovered from public contribution events; existing cards remain until newer unique
+  projects push them past the configured limit.
 - Selected work / GitHub: curated candidates, up to 20. Original repos qualify automatically.
   Forks qualify only when the fork is ahead of upstream AND at least one unique commit is
   attributable to badgids.
@@ -337,6 +339,85 @@ def fetch_external_contributions(
     return contributions
 
 
+def extract_existing_contribution_blocks(text: str) -> list[tuple[str, str]]:
+    """Return contribution cards already retained in the README, in display order."""
+    pattern = re.compile(
+        rf"<!-- {re.escape(CONTRIB_MARKER)}:START -->(.*?)"
+        rf"<!-- {re.escape(CONTRIB_MARKER)}:END -->",
+        re.DOTALL,
+    )
+    matches = list(pattern.finditer(text))
+    if len(matches) != 1:
+        raise RuntimeError(
+            f"Expected exactly one {CONTRIB_MARKER} marker block; found {len(matches)}."
+        )
+
+    body = matches[0].group(1).strip()
+    if not body or body == "_No qualifying public projects found._":
+        return []
+
+    raw_blocks = [
+        block.strip()
+        for block in re.split(r"\n\s*<br>\s*\n", body)
+        if block.strip()
+    ]
+    heading_pattern = re.compile(
+        r"^### \[[^\]]+\]\(https://github\.com/([^/\s)]+/[^/\s)#?]+)\)\s*$",
+        re.MULTILINE,
+    )
+
+    retained: list[tuple[str, str]] = []
+    seen: set[str] = set()
+    for block in raw_blocks:
+        heading = heading_pattern.search(block)
+        if heading is None:
+            raise RuntimeError(
+                "Could not parse an existing Recently Contributed to project card. "
+                "Refusing to rewrite that section because doing so could drop retained work."
+            )
+
+        full_name = heading.group(1).strip()
+        key = full_name.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        retained.append((full_name, block))
+
+    return retained
+
+
+def merge_contribution_sources(
+    discovered: Iterable[dict[str, Any]],
+    retained: Iterable[tuple[str, str]],
+) -> list[tuple[str, dict[str, Any] | str]]:
+    """Merge newly discovered projects with retained cards, then enforce the cap."""
+    merged: list[tuple[str, dict[str, Any] | str]] = []
+    seen: set[str] = set()
+
+    for repo in discovered:
+        full_name = str(repo.get("full_name") or "").strip()
+        if "/" not in full_name:
+            continue
+        key = full_name.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        merged.append((full_name, repo))
+        if len(merged) >= CONTRIBUTION_LIMIT:
+            return merged
+
+    for full_name, block in retained:
+        key = full_name.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        merged.append((full_name, block))
+        if len(merged) >= CONTRIBUTION_LIMIT:
+            break
+
+    return merged
+
+
 def fetch_repo_readme(client: GitHubClient, full_name: str) -> str:
     data = client.get(
         f"{API_ROOT}/repos/{full_name}/readme", optional_statuses=(404, 409)
@@ -517,6 +598,23 @@ def render_project_blocks(
     client: GitHubClient, repos: Iterable[dict[str, Any]], *, external: bool = False
 ) -> str:
     blocks = [render_repo_block(client, repo, external=external) for repo in repos]
+    if not blocks:
+        return "_No qualifying public projects found._"
+    return "\n\n<br>\n\n".join(blocks)
+
+
+def render_contribution_sources(
+    client: GitHubClient,
+    sources: Iterable[tuple[str, dict[str, Any] | str]],
+) -> str:
+    """Render new projects while preserving retained project cards byte-for-byte."""
+    blocks: list[str] = []
+    for _, source in sources:
+        if isinstance(source, str):
+            blocks.append(source.rstrip())
+        else:
+            blocks.append(render_repo_block(client, source, external=True))
+
     if not blocks:
         return "_No qualifying public projects found._"
     return "\n\n<br>\n\n".join(blocks)
@@ -755,7 +853,49 @@ DO NOT TOUCH THIS EITHER.
     assert not hf_is_owned_by_badgids(
         HuggingFaceWork("M", "https://huggingface.co/SomeoneElse/M", "M")
     )
-    print("Self-test passed: only explicit marker bodies can change.")
+
+    retained_sample = """<!-- AUTO-RECENT-CONTRIBUTIONS:START -->
+### [old/one](https://github.com/old/one)
+
+<br>
+
+### [old/two](https://github.com/old/two)
+<!-- AUTO-RECENT-CONTRIBUTIONS:END -->"""
+    retained = extract_existing_contribution_blocks(retained_sample)
+    assert [full_name for full_name, _ in retained] == ["old/one", "old/two"]
+
+    merged = merge_contribution_sources(
+        [
+            {"full_name": "new/repo"},
+            {"full_name": "OLD/TWO"},
+        ],
+        retained,
+    )
+    assert [full_name for full_name, _ in merged] == [
+        "new/repo",
+        "OLD/TWO",
+        "old/one",
+    ]
+    assert isinstance(merged[0][1], dict)
+    assert isinstance(merged[1][1], dict)
+    assert isinstance(merged[2][1], str)
+
+    capped = merge_contribution_sources(
+        [],
+        [
+            (
+                f"owner/repo{i}",
+                f"### [owner/repo{i}](https://github.com/owner/repo{i})",
+            )
+            for i in range(CONTRIBUTION_LIMIT + 2)
+        ],
+    )
+    assert len(capped) == CONTRIBUTION_LIMIT
+    assert [full_name for full_name, _ in capped] == [
+        f"owner/repo{i}" for i in range(CONTRIBUTION_LIMIT)
+    ]
+
+    print("Self-test passed: dynamic-section safety and contribution retention are valid.")
 
 
 def parse_args() -> argparse.Namespace:
@@ -795,11 +935,16 @@ def main() -> int:
         # Collect everything first. README.md is not written unless ALL required collection succeeds.
         inventory = list_owned_repositories(client, args.username)
         current = select_current_repositories(client, inventory, args.username)
-        contributions = fetch_external_contributions(client, args.username)
+        discovered_contributions = fetch_external_contributions(client, args.username)
+        retained_contributions = extract_existing_contribution_blocks(original)
+        contribution_sources = merge_contribution_sources(
+            discovered_contributions,
+            retained_contributions,
+        )
         selected_github = select_github_work(client, inventory, args.username)
 
         current_body = render_project_blocks(client, current, external=False)
-        contrib_body = render_project_blocks(client, contributions, external=True)
+        contrib_body = render_contribution_sources(client, contribution_sources)
         selected_github_body = render_selected_github(selected_github)
         selected_hf_body = render_selected_huggingface(SELECTED_HUGGINGFACE)
 
@@ -823,7 +968,7 @@ def main() -> int:
         )
         print(
             f"Updated {readme_path}: {len(current)} current projects, "
-            f"{len(contributions)} external contribution projects, "
+            f"{len(contribution_sources)} external contribution projects, "
             f"{len(selected_github)} selected GitHub projects, "
             f"{hf_count} selected Hugging Face projects."
         )
