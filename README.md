@@ -70,7 +70,7 @@ Author/Developer: Alan Guice (Badgids) Copyright: © 2026 Alan Guice (Badgids) L
 - Provides an embedded Audio Review / Accept Gate for choosing one candidate and optionally saving alternate takes.
 - Accepts normal ComfyUI AUDIO from TTS, voice-cloning, music, audio-loader, or processing nodes.
 
-`Python`
+`Python` · `comfy-ui` · `comfyui` · `comfyui-custom-node` · `comfyui-custom-nodes` · `comfyui-extension` · `comfyui-node` · `comfyui-nodes`
 
 <br>
 
@@ -97,7 +97,7 @@ Author/Developer: Alan Guice (Badgids) Copyright: © 2026 Alan Guice (Badgids). 
 
 ### [pi-pr-repair-loop](https://github.com/badgids/pi-pr-repair-loop)
 
-> Active repository with recent development work.
+> Maintainer-review-driven TDD repair loop for the Pi coding agent. pi-pr-repair-loop is intentionally narrow and command-driven. It does not replace Pi's normal workflow, plan mode, permissions, or tool stack.
 
 [![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/badgids/pi-pr-repair-loop)
 [![License](https://img.shields.io/github/license/badgids/pi-pr-repair-loop?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/badgids/pi-pr-repair-loop/blob/main/LICENSE)
