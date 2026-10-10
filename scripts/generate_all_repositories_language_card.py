@@ -38,6 +38,7 @@ OUTPUT = Path(
 # Keep the chart readable. Every repository and every language byte is still
 # included; smaller languages are combined into one "Other" slice.
 MAX_SLICES = max(2, int(os.environ.get("LANGUAGE_PIE_MAX_SLICES", "12")))
+API_TIMEOUT_SECONDS = int(os.environ.get("GITHUB_API_TIMEOUT_SECONDS", "180"))
 
 API_ROOT = "https://api.github.com"
 
@@ -93,7 +94,7 @@ def api_get(path: str) -> Any:
 
     for attempt in range(5):
         try:
-            with urllib.request.urlopen(request, timeout=60) as response:
+            with urllib.request.urlopen(request, timeout=API_TIMEOUT_SECONDS) as response:
                 return json.load(response)
         except urllib.error.HTTPError as exc:
             retryable = exc.code in {403, 429, 500, 502, 503, 504}
