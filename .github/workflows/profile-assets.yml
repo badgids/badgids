@@ -64,7 +64,20 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_USERNAME: badgids
           LANGUAGE_CARD_OUTPUT: assets/all-repositories-languages.svg
-        run: python3 scripts/generate_all_repositories_language_card.py
+          GITHUB_API_TIMEOUT_SECONDS: "180"
+          GITHUB_API_MAX_ATTEMPTS: "5"
+        run: |
+          for attempt in $(seq 1 3); do
+            if python3 scripts/generate_all_repositories_language_card.py; then
+              exit 0
+            fi
+            echo "Language card generation failed (attempt $attempt/3). Retrying in 15s..."
+            if [ "$attempt" -lt 3 ]; then
+              sleep 15
+            else
+              exit 1
+            fi
+          done
 
       - name: Generate GitHub trophy card
         uses: ryo-ma/github-profile-trophy@e3c89df995e92e67cdd4b2acaab9d974583dc1f7
