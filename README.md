@@ -132,6 +132,48 @@ Author/Developer: Alan Guice (Badgids) License: Apache License 2.0 Copyright © 
 ## 🤝 Recently Contributed to
 
 <!-- AUTO-RECENT-CONTRIBUTIONS:START -->
+### [warriorxxzz/datatrust-ai](https://github.com/warriorxxzz/datatrust-ai)
+
+> An Enterprise-grade DevSecOps CLI for detecting and auto-remediating Secrets, PII, SAST, and IaC vulnerabilities. Built in Python.
+
+[![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/warriorxxzz/datatrust-ai)
+[![License](https://img.shields.io/github/license/warriorxxzz/datatrust-ai?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/warriorxxzz/datatrust-ai/blob/main/LICENSE)
+[![Last commit](https://img.shields.io/github/last-commit/warriorxxzz/datatrust-ai?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/warriorxxzz/datatrust-ai/commits/main)
+
+A local-first DevSecOps CLI for detecting and auto-remediating Secrets, PII, SAST vulnerabilities, and IaC misconfigurations.
+
+- Secret & PII Detection: Detects AWS, OpenAI, and GitHub tokens using Shannon Entropy. Supports regional PII (Nepal/India) and handles Devanagari digits.
+- SAST (Static Analysis): Parses Python AST to detect SQL Injection risks, weak cryptography (e.g., MD5), and dangerous function calls (eval, exec).
+- Infrastructure as Code (IaC): Scans Dockerfile for root users/hardcoded secrets and Kubernetes YAMLs for privileged: true.
+- Dependency Scanning (SCA): Checks requirements.txt against the OSV database for known CVEs.
+- Auto-Remediation: Automatically moves exposed secrets to .env, changes Docker USER root to USER nonroot, and fixes K8s YAML misconfigurations.
+- Blazing Fast: Uses multi-processing and MD5 SQLite caching to only scan modified files.
+
+`Python` · `cybersecurity` · `devsecops` · `nepal` · `pii` · `sast` · `secrets-detection` · `security-tools`
+
+<br>
+
+### [pinguy/rhizome-stack](https://github.com/pinguy/rhizome-stack)
+
+> Portable, sanitised OpenClaw and Open WebUI integration for Linux and WSL
+
+[![Repository](https://img.shields.io/badge/VIEW_THE_REPOSITORY-F9A620?style=for-the-badge&logo=github&logoColor=0D1117)](https://github.com/pinguy/rhizome-stack)
+[![License](https://img.shields.io/github/license/pinguy/rhizome-stack?style=for-the-badge&labelColor=161B22&color=22D3EE)](https://github.com/pinguy/rhizome-stack/blob/main/LICENSE)
+[![Last commit](https://img.shields.io/github/last-commit/pinguy/rhizome-stack?style=for-the-badge&labelColor=161B22&color=F9A620)](https://github.com/pinguy/rhizome-stack/commits/main)
+
+Built by Antoni Norman with heavy AI-assisted development, manual testing, direction, tuning and final integration. Built on and alongside OpenClaw, Open WebUI and other open-source projects; upstream authorship is preserved in LICENSES.md.
+
+- create a Qwen image and keep the PNG inline in that chat;
+- edit an image uploaded by the signed-in Open WebUI user;
+- create a MiniMax song and keep the MP3 as a native playable file card;
+- create or image-condition a WAN video, keep the MP4 inline in the chat and
+- continue the conversation with the local chat model after generation.
+- First run and model verification
+
+`Python` · `linux` · `local-ai` · `open-webui` · `openclaw` · `wsl`
+
+<br>
+
 ### [ethanfel/ComfyUI-MiniMaxH3-Context-Loop](https://github.com/ethanfel/ComfyUI-MiniMaxH3-Context-Loop)
 
 > Clip chaining for MiniMax H3 in ComfyUI - motion and audio genuinely continue across joins
