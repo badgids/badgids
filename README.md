@@ -166,7 +166,7 @@ Built by Antoni Norman with heavy AI-assisted development, manual testing, direc
 - create a Qwen image and keep the PNG inline in that chat;
 - edit an image uploaded by the signed-in Open WebUI user;
 - create a MiniMax song and keep the MP3 as a native playable file card;
-- create or image-condition a WAN video, keep the MP4 inline in the chat and
+- create or image-condition a WAN or MiniMax H3 video, keep the MP4 inline in the chat and
 - continue the conversation with the local chat model after generation.
 - First run and model verification
 
