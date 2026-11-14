@@ -164,7 +164,7 @@ A local-first DevSecOps CLI for detecting and auto-remediating Secrets, PII, SAS
 Built by Antoni Norman with heavy AI-assisted development, manual testing, direction, tuning and final integration. Built on and alongside OpenClaw, Open WebUI and other open-source projects; upstream authorship is preserved in LICENSES.md.
 
 - create a Qwen image and keep the PNG inline in that chat;
-- edit an image uploaded by the signed-in Open WebUI user;
+- edit an image uploaded by the signed-in Open WebUI user or reuse a PNG from
 - create a MiniMax song and keep the MP3 as a native playable file card;
 - create or image-condition a WAN or MiniMax H3 video, keep the MP4 inline in the chat and
 - continue the conversation with the local chat model after generation.
